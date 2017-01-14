@@ -1,0 +1,38 @@
+// WIDGET CHANNEL ADSENSE ADSENSE
+
+// ADSENSE A 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- mob lg banner -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:320px;height:100px"
+     data-ad-client="ca-pub-4943462589133750"
+     data-ad-slot="5993932022"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+// ADSENSE B
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- newwp -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4943462589133750"
+     data-ad-slot="9190441627"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+// ADSENSE C
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- mobile -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:320px;height:100px"
+     data-ad-client="ca-pub-4943462589133750"
+     data-ad-slot="8357459220"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>

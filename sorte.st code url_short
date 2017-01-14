@@ -1,0 +1,32 @@
+
+<script type="text/javascript">//<![CDATA[ 
+(function() {
+    var configuration = {
+    "token": "e3d8f30095c3b5f56af57eba685359d5",
+    "excludeDomains": [
+        "organisemybiz.com"
+    ],
+    "capping": {
+        "limit": 5,
+        "timeout": 24
+    },
+    "exitScript": {
+        "enabled": true
+    },
+    "popUnder": {
+        "enabled": false
+    }
+};
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = '//cdn.shorte.st/link-converter.min.js';
+    script.onload = script.onreadystatechange = function () {var rs = this.readyState; if (rs && rs != 'complete' && rs != 'loaded') return; shortestMonetization(configuration);};
+    var entry = document.getElementsByTagName('script')[0];
+    entry.parentNode.insertBefore(script, entry);
+})();
+//]]></script>                
+
+
+
+http://sh.st/st/e3d8f30095c3b5f56af57eba685359d5/
+        

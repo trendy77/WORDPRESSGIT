@@ -1,0 +1,73 @@
+// sdk setup for facebook - organisemybizMedia
+id for news: 1209167032497461
+////
+https://developers.facebook.com/apps/1209167032497461/audience-network/
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '333891106995405',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+Test your Facebook Integration
+Now that you've got the SDK setup, you can use it to perform a few common tasks. Social Plugins such as the Like Button and Comments Plugin can be inserted into HTML pages using the JavaScript SDK.Let's try adding a Like button, just copy and paste the line of code below anywhere inside the <body> of your page:
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+
+Canonical URLs
+Our crawler fetches content to share by resolving to a URL that you designate as the canonical URL.As a best practice, you should label all variations of a page with the canonical URL using an og:url tag (preferred) or link rel="canonical". The HTML for the canonical URL itself should also contain an og:url tag to designate itself as the canonical resource.
+<meta property="og:url" content="https://example.com/path" />
+This ensures that all actions such as likes and shares aggregate at the same URL rather than spreading across multiple versions of a page. This also means that different versions of the same content will be treated the same, even if they're hosted on separate subdomains or are accessible over both http:// and https://.
+
+// QUOTE Plugin
+<html>
+<head>
+  <title>Your Website Title</title>
+  <!-- Comment #1: OG Tags -->
+  <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Your Website Title" />
+  <meta property="og:description"   content="Your description" />
+  <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
+</head>
+<body>
+
+  <!-- Comment #2: SDK -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+  <!-- Comment #3: Content -->
+  <h1>Your Headline</h1>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget tristique nibh, 
+    vel consequat purus. Praesent molestie, turpis ut ultrices commodo, felis arcu cursus enim, 
+    vel porttitor ante quam vel lacus. Quisque at laoreet sapien. Proin nec purus dolor. Integer 
+    pharetra nec ligula a condimentum. Fusce sem orci, porta ut felis id, commodo imperdiet risus. 
+  </p>
+  <!-- Comment #4: Plugin Code -->
+ <div class="fb-quote"></div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+With Post Formats, the new approach allows a theme to add support for a Post Format (e.g. add_theme_support('post-formats', array('aside'))), and then the post format can be selected in the Publish meta box when saving the post. A function call of get_post_format($post->ID) can be used to determine the format, and post_class() will also create the "format-asides" class, for pure-css styling.
+
+shortcodes can be embedded in your email to configure various aspects of the published post:
+[category x,y,z]
+[excerpt]some excerpt[/excerpt]
+[tags x,y,z]
+[delay +1 hour]
+[comments on | off]
+[status publish | pending | draft | private]
+[slug some-url-name]
+[title Your post title]
+[end] – everything after this shortcode is ignored (i.e. signatures). Make sure it’s on its own line with a blank line above it.
+[slideshow] – replaces the auto-gallery with a slideshow
+[nogallery] – disables the auto-gallery and displays all images inline
+[more] – more tag
+[nextpage] – pagination
+[publicize off|yahoo|twitter|facebook] – change Publicize options (see below)
+[poll]question and answers[/poll] – insert a Polldaddy poll into your post (see below)
+Shortcodes can be included anywhere in the body of your email and must be in lowercase. There should be no spaces between the left square braket and the shortcode content.

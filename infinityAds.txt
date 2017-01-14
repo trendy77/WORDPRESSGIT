@@ -1,0 +1,22 @@
+infinity ads
+user 64684??
+Joker999
+
+<script type="text/javascript"> 
+  infinityads_enable_pop = true; 
+infinityads_adhere_opt='corner:tl'; 
+infinityads_frequencyCap =0;
+infinityads_enable_inter = true;
+ infinityads_maxad = -1;
+ infinityads_hourcap = -1;
+ infinityads_showcap = 2;
+infinityads_durl = '';
+infinityads_layer_border_color = '';
+infinityads_layer_ad_bg = '';
+infinityads_layer_ad_link_color = '';
+infinityads_layer_ad_text_color = '';
+infinityads_text_link_bg = '';
+infinityads_text_link_color = '';
+infinityads_enable_text_link = true;
+</script>
+<script type="text/javascript" src="http://a.clicksor.net/show.php?nid=5&pid=68494&adtype=&sid=115748"></script> 

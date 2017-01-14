@@ -1,0 +1,7 @@
+Your API account parameters.
+
+Name	Value	Description
+API Base URL	https://affiliates.mobidea.com/api/export/stats/http-xml	Base URL for the export XML/JSON API. Required
+login	2798515792	Your API login (username). Required
+password	b4e221c4d6567a05eebafe15851b7ba8	Your API password. Required
+date	 	Date for which you want 
