@@ -1,7 +1,9 @@
+///*** HTML addition to Gapps script wit hhtml output for blogposting***/
+
+<!DOCTYPE html>
 <html>
 <head>
-	
-    <!-- You can use open graph tags to customize link previews.    Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+<base target="_top"><meta charset="UTF-8">
 <title>OrganiseMyBiz</title>	<meta property="og:url"           content="http://www.organisemybiz.com/" />
 	<meta property="og:type"          content="website" />
 	<meta property="og:title"         content="Breaking news and trending content from across the Globe" />
@@ -9,8 +11,7 @@
 	<meta property="og:image"         content="http://organisemybiz.com/wp-content/uploads/2016/12/5b83066ad0a6b73859f1fc6db5ee2901s_k7.jpg" />
 </head>
 <body>
-
-	<!-- Load Facebook SDK for JavaScript -->
+<!-- Load Facebook SDK for JavaScript -->
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 	  var js, fjs = d.getElementsByTagName(s)[0];
@@ -27,6 +28,32 @@
 		data-action="like" 
 		data-show-faces="true">
 	</div>
+    
+<?!  if (htmlBody == null) {  ?>
 
+<a href="http://adf.ly/15466373/"+ArticleUrl+"">View original Story HERE</a>
+getInlineImages(image);
+var 'post_thumbnail' = image;
+
+<?! } else {  ?>
+
+htmlBody; 
+
+
+<? if (ORGBIZ == 1) { ?>    
+<a href="http://organisemybiz.com/<?!CATEGORYSLUG?>">View More <?!CATEGORYSLUG ?>HERE</a>
+<br><a href="http://organisemybiz.com/tag/<?!sourceUrl?>"">View More <?! SourceTitle?> HERE</a><br>
+<br><a href="http://adf.ly/15466373/<?!articleUrl?>">Original HERE via <?! SourceTitle ?></a><br>
+
+
+<? } else if (FAKENEWS == 1){ ?>
+
+
+<a href="http://fakenewsregistry.org/<?!CATEGORYSLUG?>">View More <?!CATEGORYSLUG?>HERE</a><br>
+<a href="http://adf.ly/15466373/fakenewsregistry.org/tag/<?!rowData[5]?>">View More <?!rowData[6]?>HERE</a><br>
+<br><a href=""http://adf.ly/15466373/<?!rowData[4]?>"">Original HERE via<?!rowData[5]?> </a><br>
+<?! } ?>
 </body>
 </html>
+
+<?! } ?>

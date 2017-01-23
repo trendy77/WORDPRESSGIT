@@ -1,0 +1,109 @@
+var CATEGORYSLUG = '#contentFeed';
+var ORGBIZ = 1;   var FAKENEWS = 0;
+var DUP = "DUP_CHECKED";
+var CATEGORYSLUG = '#contentFeed';
+var ORGBIZ = 1;   var FAKENEWS = 0;
+var DUP = "DUP_CHECKED";
+
+
+function onEdit(e){
+    var sheet = SpreadsheetApp.getActiveSheet();
+  var data = sheet.getDataRange().getValues();            //we do a single call to the spreadsheet to retrieve all the data.
+  var newData = new Array();                           // newData is an empty array where we will put all rows which are not duplicates.
+  for(i in data){
+    var row = data[i];
+    var duplicate = false;                             //      for loop iterates over each row in the data 2-dimensional array. 
+    for(j in newData){                                 //     For each row, the second loop tests if another row with matching data already exists in 
+      if(row.join() == newData[j].join()){             //     the newData array. If it is not a duplicate, the row is pushed into the newData array.
+        duplicate = true;
+      }
+    }
+    if(!duplicate){
+      newData.push(row);
+    }
+  }
+  sheet.clearContents();                            //      the script deletes the existing content of the sheet and inserts the content of the newData array.
+  sheet.getRange(1, 1, newData.length, newData[0].length).setValues(newData);
+ sheet.getRange(2, 8, newData.length, 1).setValues('DUP_CHECKED');
+SpreadsheetApp.flush();
+ }
+
+var emailtoPost = "thecreator@organisemybix.com"//"thepostie@organisemybiz.com";
+
+function sendEmail(){ 
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+ var sheet = ss.getSheets()[0];
+ var range = sheet.getRange(2, 1, 1, 7);
+ var data = range.getValues();
+for (var i = 0; i < data.length; i++){ 
+    var rowData = data[i];
+  var title = rowData[0];
+ var desc = rowData[1];
+  if (desc == null){
+    desc = "[embedlyt]"+articleUrl+"[/embedlyt]";
+  }
+  
+ // regEx = '/http[s]*:\/\/.+/g';
+ // var links = desc.match(regEx);
+ // for (var j =0; j<links; links++){
+//links.Append(0, 'https://adf.ly/15466373/');
+ // }
+    var articleUrl = rowData[2];
+   var categories = rowData[3];
+    var sourceTitle = rowData[4];
+      var sourceUrl = rowData[5];
+       var image = rowData[6]; 
+     //   var dupcheck =rowData[7];
+     // choose your route HERE - see comment below
+ /*    
+  var html1 = ('<!DOCTYPE html><html><head><base target="_top"><meta charset="UTF-8"><title>OrganiseMyBiz | ' + title +'</title></head><body><a href="http://adf.ly/15466373/' + articleUrl + '">Read Original Article HERE</a><br></body></html>');
+  var html2 = (desc + '<br><a href="http://organisemybiz.com/contentfeed">View More #contentFeed HERE</a><br><a href="http://organisemybiz.com/tag/' +sourceTitle+ '">View More' + sourceTitle
++ ' HERE</a><br>');
+  var html = html1+html2;
+
+
+//UNUSED METHOD - JSON PAYLOAD CREATORION  
+//INCLUDES FACEBOOK SDK WITH LIKE BUTTON AND OG METATAGS
+*/
+ var html =   HtmlService.createHtmlOutputFromFile('i')
+    .evaluate();
+      var data = {
+				value1: title,
+                value2: html,
+				value3: categories
+			};
+ var payload= (JSON.stringify(data));       
+ Logger.log(data);
+ }
+ // }
+  /*
+  /// JSON XMLRPC OR VIA EMAIL?
+  // BELOW IS XMLRPC...
+var url = "https://organisemybiz.com/xmlrpc.php"
+ var options = {
+    'method': 'post',
+   'payload': payload
+    };   
+  UrlFetchApp.fetch(url, options);
+ var response = Logger.log(response);
+  }
+
+
+*/
+ 
+  
+  if (image){
+ var file = UrlFetchApp.fetch(image).getBlob();  
+       MailApp.sendEmail(emailtoPost, title, desc, {
+        htmlBody: html,
+        attachments: [file.getAs(MimeType.JPEG)]
+         });
+ } else {
+  MailApp.sendEmail(emailtoPost, title, desc, {
+        htmlBody: html,
+         });
+        }
+     //}
+sheet.deleteRow(2);
+}
+
