@@ -1,0 +1,20 @@
+add_filter( 'rss2_head', 'feedly_head' );
+function feedly_head() {
+ echo '<webfeeds:cover image="Cover image link" />';
+ echo '<webfeeds:icon>Logo link</webfeeds:icon>';
+}
+
+
+// You can also add your Blog’s logo to all of your posts by specifying an SVG-formatted logo. To do so, add the <webfeeds:logo> markup to functions.php and the recommended height of logo is 30px.
+
+add_filter( 'rss2_head', 'feedly_head' );
+function feedly_head() {
+echo '<webfeeds:logo>SVG logo link</webfeeds:logo>';
+}
+
+// add related articles to your RSS
+
+add_filter( 'rss2_head', 'feedly_head' );
+function feedly_head() {
+echo '<webfeeds:related layout=”card” target=”browser”/>';
+}

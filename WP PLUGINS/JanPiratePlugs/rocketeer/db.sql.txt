@@ -1,0 +1,314 @@
+CREATE TABLE IF NOT EXISTS `badges` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `img` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `badge_desc` text COLLATE utf8_unicode_ci NOT NULL,
+  `min_points` int(10) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `pos` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `bg_color` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '#424242',
+  `cat_img` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `slug_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` bigint(20) NOT NULL,
+  `mid` bigint(20) NOT NULL,
+  `body` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `followers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `subscriber_uid` bigint(20) NOT NULL,
+  `followed_uid` bigint(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `media` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `media_desc` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `media_type` tinyint(3) unsigned DEFAULT NULL,
+  `thumbnail` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `featured_img` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `share_img` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `uid` bigint(20) unsigned NOT NULL,
+  `cid` int(10) unsigned NOT NULL,
+  `slug_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `like_count` int(10) unsigned NOT NULL DEFAULT '0',
+  `comment_count` int(10) unsigned NOT NULL DEFAULT '0',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `page_content` text COLLATE utf8_unicode_ci NOT NULL,
+  `page_content_filtered` text COLLATE utf8_unicode_ci NOT NULL,
+  `weekly_like_count` int(10) unsigned NOT NULL DEFAULT '0',
+  `nsfw` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `uploads` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `media_likes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `mid` bigint(20) unsigned NOT NULL,
+  `sid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `media_points` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` bigint(20) NOT NULL,
+  `mid` bigint(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `memes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `meme_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `upl_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `ext` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'jpg',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `page_type` tinyint(4) NOT NULL DEFAULT '1',
+  `slug_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `page_content` text COLLATE utf8_unicode_ci NOT NULL,
+  `contact_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `direct_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `password_resets` (
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `poll_votes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` bigint(20) unsigned NOT NULL,
+  `vote_keys` text COLLATE utf8_unicode_ci NOT NULL,
+  `sid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `settings` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `site_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Rocketeer',
+  `site_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Rocketeer',
+  `site_desc` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Rocketeer',
+  `display_count` int(10) unsigned NOT NULL DEFAULT '8',
+  `site_dir` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `max_media_img_size` int(10) unsigned NOT NULL DEFAULT '1',
+  `isPreapproved` int(10) unsigned NOT NULL DEFAULT '1',
+  `canCreatePoll` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canCreateTrivia` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canCreatePersonality` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canCreateImage` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canCreateMeme` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canCreateVideo` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canCreateArticles` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canCreateLists` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canViewPoll` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canViewQuiz` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canViewImage` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canViewVideo` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canViewArticles` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `canViewLists` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `facebook` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `twitter` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `gp` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `youtube` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `soundcloud` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `instagram` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_registration` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `profile_img_size` int(10) unsigned NOT NULL DEFAULT '1',
+  `fb_app_key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fb_app_secret` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `twitter_client_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `twitter_client_secret` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `google_client_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `google_client_secret` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `site_domain` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `slides` text COLLATE utf8_unicode_ci NOT NULL,
+  `sidebar_ad` text COLLATE utf8_unicode_ci NOT NULL,
+  `footer_ad` text COLLATE utf8_unicode_ci NOT NULL,
+  `header_ad` text COLLATE utf8_unicode_ci NOT NULL,
+  `list_ad` text COLLATE utf8_unicode_ci NOT NULL,
+  `default_lang` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'en',
+  `last_media_cron_update` int(10) unsigned NOT NULL,
+  `logo_type` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `logo_img` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `site_color` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'blue',
+  `homepage_type` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `site_ver` double(8,2) unsigned NOT NULL DEFAULT '7.10',
+  `soundcloud_client_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `soundcloud_client_secret` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `list_ad_type` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `list_ad_nth_count` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `google_analytics_tracking_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `recaptcha_public_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `confirm_registration` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `watermark_enabled` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `watermark_img_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `watermark_x_pos` tinyint(3) unsigned NOT NULL DEFAULT '50',
+  `watermark_y_pos` tinyint(3) unsigned NOT NULL DEFAULT '50',
+  `allow_custom_memes` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `nsfw_img` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'nsfw-thumbnail.png',
+  `fb_comments` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `disqus_comments` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `system_comments` tinyint(3) unsigned NOT NULL DEFAULT '2',
+  `disqus_shortname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `main_comment_system` tinyint(4) NOT NULL DEFAULT '1',
+  `favicon` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'favicon.ico',
+  `send_approved_media_email` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `widgets` text COLLATE utf8_unicode_ci NOT NULL,
+  `custom_css` text COLLATE utf8_unicode_ci NOT NULL,
+  `media_overrides` text COLLATE utf8_unicode_ci NOT NULL,
+  `media_defaults` text COLLATE utf8_unicode_ci NOT NULL,
+  `cache_enabled` tinyint(4) NOT NULL DEFAULT '1',
+  `lang_switcher` tinyint(4) NOT NULL DEFAULT '1',
+  `lang_switcher_loc` tinyint(4) NOT NULL DEFAULT '1',
+  `languages` text COLLATE utf8_unicode_ci NOT NULL,
+  `infinite_pagination` tinyint(4) NOT NULL DEFAULT '1',
+  `aws_s3` tinyint(4) NOT NULL DEFAULT '1',
+  `aws_s3_key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `aws_s3_secret` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `aws_s3_region` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `aws_s3_bucket` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `duplicate_list` tinyint(4) NOT NULL DEFAULT '1',
+  `notify_user_duplicate_list` tinyint(4) NOT NULL DEFAULT '1',
+  `poll_signed_in_votes` tinyint(4) NOT NULL DEFAULT '1',
+  `enable_newsletter_subscribe` tinyint(4) NOT NULL DEFAULT '1',
+  `mailchimp_api_key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mailchimp_list_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `iframe_urls` text COLLATE utf8_unicode_ci NOT NULL,
+  `allow_embeds` tinyint(4) unsigned NOT NULL DEFAULT '1',
+  `google_font` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Open+Sans:400,700,800,300',
+  `site_font` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '"Open Sans", sans-serif',
+  `auto_scroll` tinyint(4) unsigned NOT NULL DEFAULT '1',
+  `generate_special_share_img` tinyint(4) unsigned NOT NULL DEFAULT '1',
+  `auto_scroll_timer` int(9) unsigned NOT NULL DEFAULT '3000',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `subscriptions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `stripe_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `stripe_plan` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `trial_ends_at` timestamp NULL DEFAULT NULL,
+  `ends_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `upl_dir` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `location` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `gender` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `about` text COLLATE utf8_unicode_ci NOT NULL,
+  `profile_img` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'default-profile.png',
+  `points` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `display_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `isAdmin` tinyint(4) NOT NULL DEFAULT '1',
+  `isMod` tinyint(4) NOT NULL DEFAULT '1',
+  `header_img` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'headers/4.jpg',
+  `intro_text` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `twitter` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `facebook` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `gplus` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `vk` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `soundcloud` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `autoapprove` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `email_confirmed` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `login_type` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `confirmation_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `is_demo` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `stripe_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `card_brand` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `card_last_four` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_username_unique` (`username`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `user_badge` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` bigint(20) unsigned NOT NULL,
+  `bid` bigint(20) unsigned NOT NULL,
+  `user_checked` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `user_notifications` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `message` text COLLATE utf8_unicode_ci NOT NULL,
+  `is_read` tinyint(4) unsigned NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `user_uploads` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` bigint(20) unsigned NOT NULL,
+  `original_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `upl_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

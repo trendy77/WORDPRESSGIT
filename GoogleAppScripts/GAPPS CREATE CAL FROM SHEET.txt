@@ -1,0 +1,222 @@
+
+function onEdit(e){
+    var sheet = SpreadsheetApp.getActiveSheet();
+  var data = sheet.getDataRange().getValues();            //we do a single call to the spreadsheet to retrieve all the data.
+  var newData = new Array();                           // newData is an empty array where we will put all rows which are not duplicates.
+  for(i in data){
+    var row = data[i];
+    var duplicate = false;                             //      for loop iterates over each row in the data 2-dimensional array. 
+    for(j in newData){                                 //     For each row, the second loop tests if another row with matching data already exists in 
+      if(row[0] == newData[j][0]){
+  duplicate = true;
+		}
+    }  
+    if(!duplicate){
+      newData.push(row);
+    }
+  }
+  sheet.clearContents();                            
+  sheet.getRange(1, 1, newData.length, newData[0].length).setValues(newData);
+ SpreadsheetApp.flush();
+}
+
+var EVENT_MADE = "EVENT_MADE";
+
+function pushToCalendar() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var lastRow = sheet.getLastRow(); 
+  var range = sheet.getRange(2,1,lastRow,7);
+  var values = range.getValues();   
+  var updateRange = sheet.getRange('I1'); 				// !!!! or should this be H1?
+var templateSheet = sheet.getSheets()[1];
+ var emailTemplateStd = templateSheet.getRange("A1").getValue();		// will be description - main post
+ var emailTemplateImg = templateSheet.getRange("C1").getValue();
+var emailTemplateSub = templateSheet.getRange("B1").getValue();		// will be subject - title
+      
+  //calendar variables
+  var calendar = CalendarApp.getCalendarById('5294bsdd311t0sle6cjhqqm3r4@group.calendar.google.com');
+    updateRange.setFontColor('red');		  //show updating message
+    var numValues = 0;
+  for (var i = 0; i < values.length; i++) {     
+ var rowData = values[i];    
+  //check to see if title and content are filled out 
+    if ((values[i][0].length > 0) && (values[i][1].length > 0)) {
+     if (values[i][8] != 'EVENT_MADE') {                       
+  	 if ((values[i][6].length > 0)){						// see if there's image
+		 
+	var newEventTitle= fillInTemplateFromObject(emailTemplateSub, rowData);
+	 var newPost = fillInTemplateFromObject(emailTemplateImg, rowData);
+	 var newEvent = calendar.createAllDayEvent(newEventTitle, newPost);	 
+	 var newEventId = newEvent.getId();
+    	 			 
+		 } else {
+	var newEventTitle= fillInTemplateFromObject(emailTemplateSub, rowData);
+	 var newPost = fillInTemplateFromObject(emailTemplateStd, rowData);
+	 var newEvent = calendar.createAllDayEvent(newEventTitle, newPost);	 
+	 var newEventId = newEvent.getId();
+      }
+	    //mark as entered, enter ID
+        sheet.getRange(i+6,7).setValue(EVENT_MADE);
+        sheet.getRange(i+6,8).setValue(newEventId);
+         
+      } //could edit here with an else statement
+    }
+    numValues++;
+  }
+    updateRange.setFontColor('white');				   //hide updating message
+ }
+ 
+//add a menu when the spreadsheet is opened
+function onOpen() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet();
+  var menuEntries = [];  
+  menuEntries.push({name: "send2Calendar", functionName: "pushToCalendar"}); 
+  sheet.addMenu("BlogPost Calendar", menuEntries);  
+}
+ 
+ 
+ 
+ 
+ 
+ // Replaces markers in a template string with values define in a JavaScript data object.
+// Arguments:
+//   - template: string containing markers, for instance ${"Column name"}
+//   - data: JavaScript object with values to that will replace markers. For instance
+//           data.columnName will replace marker ${"Column name"}
+// Returns a string without markers. If no data is found to replace a marker, it is
+// simply removed.
+function fillInTemplateFromObject(template, data) {
+  var email = template;
+  // Search for all the variables to be replaced, for instance ${"Column name"}
+  var templateVars = template.match(/\$\{\"[^\"]+\"\}/g);
+
+  // Replace variables from the template with the actual values from the data object.
+  // If no value is available, replace with the empty string.
+  if (templateVars != null){
+  for (var i = 0; i < templateVars.length; ++i) {
+    // normalizeHeader ignores ${"} so we can call it directly here.
+    var variableData = data[normalizeHeader(templateVars[i])];
+    email = email.replace(templateVars[i], variableData || "");
+  }
+  }
+  return email;
+}
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+// The code below is reused from the 'Reading Spreadsheet data using JavaScript Objects'
+// tutorial.
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// getRowsData iterates row by row in the input range and returns an array of objects.
+// Each object contains all the data for a given row, indexed by its normalized column name.
+// Arguments:
+//   - sheet: the sheet object that contains the data to be processed
+//   - range: the exact range of cells where the data is stored
+//   - columnHeadersRowIndex: specifies the row number where the column names are stored.
+//       This argument is optional and it defaults to the row immediately above range;
+// Returns an Array of objects.
+function getRowsData(sheet, range, columnHeadersRowIndex) {
+  columnHeadersRowIndex = columnHeadersRowIndex || range.getRowIndex() - 1;
+  var numColumns = range.getEndColumn() - range.getColumn() + 1;
+  var headersRange = sheet.getRange(columnHeadersRowIndex, range.getColumn(), 1, numColumns);
+  var headers = headersRange.getValues()[0];
+  return getObjects(range.getValues(), normalizeHeaders(headers));
+}
+
+// For every row of data in data, generates an object that contains the data. Names of
+// object fields are defined in keys.
+// Arguments:
+//   - data: JavaScript 2d array
+//   - keys: Array of Strings that define the property names for the objects to create
+function getObjects(data, keys) {
+  var objects = [];
+  for (var i = 0; i < data.length; ++i) {
+    var object = {};
+    var hasData = false;
+    for (var j = 0; j < data[i].length; ++j) {
+      var cellData = data[i][j];
+      if (isCellEmpty(cellData)) {
+        continue;
+      }
+      object[keys[j]] = cellData;
+      hasData = true;
+    }
+    if (hasData) {
+      objects.push(object);
+    }
+  }
+  return objects;
+}
+
+// Returns an Array of normalized Strings.
+// Arguments:
+//   - headers: Array of Strings to normalize
+function normalizeHeaders(headers) {
+  var keys = [];
+  for (var i = 0; i < headers.length; ++i) {
+    var key = normalizeHeader(headers[i]);
+    if (key.length > 0) {
+      keys.push(key);
+    }
+  }
+  return keys;
+}
+
+// Normalizes a string, by removing all alphanumeric characters and using mixed case
+// to separate words. The output will always start with a lower case letter.
+// This function is designed to produce JavaScript object property names.
+// Arguments:
+//   - header: string to normalize
+// Examples:
+//   "First Name" -> "firstName"
+//   "Market Cap (millions) -> "marketCapMillions
+//   "1 number at the beginning is ignored" -> "numberAtTheBeginningIsIgnored"
+function normalizeHeader(header) {
+  var key = "";
+  var upperCase = false;
+  for (var i = 0; i < header.length; ++i) {
+    var letter = header[i];
+    if (letter == " " && key.length > 0) {
+      upperCase = true;
+      continue;
+    }
+    if (!isAlnum(letter)) {
+      continue;
+    }
+    if (key.length == 0 && isDigit(letter)) {
+      continue; // first character must be a letter
+    }
+    if (upperCase) {
+      upperCase = false;
+      key += letter.toUpperCase();
+    } else {
+      key += letter.toLowerCase();
+    }
+  }
+  return key;
+}
+
+// Returns true if the cell where cellData was read from is empty.
+// Arguments:
+//   - cellData: string
+function isCellEmpty(cellData) {
+  return typeof(cellData) == "string" && cellData == "";
+}
+
+// Returns true if the character char is alphabetical, false otherwise.
+function isAlnum(char) {
+  return char >= 'A' && char <= 'Z' ||
+    char >= 'a' && char <= 'z' ||
+    isDigit(char);
+}
+
+// Returns true if the character char is a digit, false otherwise.
+function isDigit(char) {
+  return char >= '0' && char <= '9';
+}

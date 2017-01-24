@@ -1,0 +1,130 @@
+/* Cryout Serious Slider About page */
+#serious-slider-about,
+#serious-slider-about p,
+#serious-slider-about ul {
+	font-size: 1.1em;
+	line-height: 1.7;
+}
+
+#serious-slider-about ul {
+	line-height: 1.3;
+	list-style: inside disc;
+}
+
+
+#serious-slider-about input[type='text'],
+#serious-slider-about textarea,
+#serious-slider-about select {
+	min-width: 200px;
+	width: 80%;
+	max-width: 600px;
+}
+
+#serious-slider-about input.short,
+#serious-slider-about select.short { 
+	width: 50px;
+}
+
+#serious-slider-about #post-body {
+	margin-right: 0;
+	max-width: 800px;
+}
+
+#serious-slider-about .postbox {
+	padding: 3em;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#serious-slider-about #serious-slider-header {
+}
+
+#serious-slider-about #serious-slider-description  {
+	margin-top: 3em;
+}
+
+/* Edit pages */
+
+#cryout_serious_slider_category,
+#menu_order {width: 10%;}
+
+.form-wrap, #edittag {
+	background: #FFF;
+	border: 1px solid #e5e5e5;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+	padding: 1em 2em;
+}
+
+#edittag {
+	position: relative;
+}
+
+.form-wrap .form-table tr th, .form-wrap .form-table tr td,
+#edittag .form-table tr th, #edittag .form-table tr td {
+	padding: 7px 10px; 
+}
+
+.form-wrap .short, #edittag .short { min-width: 220px; width: auto; }	
+.form-wrap input[type=number] { text-align: right; }  
+
+@media (min-width: 780px) {
+	#col-left, #col-right, #edittag { width: 50%; }
+}
+
+div.term-slug-wrap,
+div.term-parent-wrap,
+div.term-description-wrap,
+tr.term-slug-wrap,
+tr.term-parent-wrap,
+tr.term-description-wrap {
+	display: none;
+}
+
+div.term-name-wrap p,
+tr.term-name-wrap p{
+	display: none;
+}
+
+/* temporarily hide quick edit button on slides */
+/*div.row-actions .editinline { display: none; }
+div.row-actions .edit + .inline { display: none; } */
+
+#the-list ul.cat-checklist { max-height: 12em; height: auto; }
+
+.type-cryout_serious_slide .column-featured_image img { max-height: 120px; }
+
+#posts-filter table.wp-list-table th.column-description, #posts-filter table.wp-list-table th.column-slug,
+#posts-filter table.wp-list-table td.column-description, #posts-filter table.wp-list-table td.column-slug,
+select#filter-by-date {
+	display: none; 
+}
+
+/* Taxonomy shortcode box */
+
+#floater-right {
+	display: block;
+	width: 450px;
+	position: absolute;
+	top: 0;
+	left: 100%;
+}
+#floater-right textarea, #floater-right input[type="text"] {
+	width: 100%;
+	border: 0;
+	padding: 10px; 
+	box-shadow: none;
+	font-weight: bold; 
+}
+
+@media (max-width: 960px) {
+	#floater-right { width: 40%; }
+}
+
+@media (max-width: 780px) {
+	#floater-right {
+	width: 98%; 
+	position: static; }
+}
+
+/* FIN */

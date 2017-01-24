@@ -1,0 +1,131 @@
+// Colors
+$white: #fff;
+$black: #424242;
+$grey: #ccc;
+
+$colors: (
+        "white": $white,
+        "alizarin": #e74c3c,
+        "android": #9c0,
+        "apple": #a7a9ab,
+        "asbestos": #7f8c8d,
+        "behance": #0c77a1,
+        "belizehole": #2980b9,
+        "black": $black,
+        "blogger": #f6821f,
+        "blue": #4fc1e9,
+        "carrot": #e67e22,
+        "chrome": #ce4e4d,
+        "clouds": #ecf0f1,
+        "concrete": #95a5a6,
+        "delicious": #3399ff,
+        "deviantart": #404f4c,
+        "dribbble": #ea4c89,
+        "dropbox": #007ee5,
+        "emerald": #2ecc71,
+        "evernote": #5fb336,
+        "facebook": #395693,
+        "firefox": #ca4b27,
+        "flattr": #7fa92c,
+        "flickr": #1e75ce,
+        "forrst": #3b7140,
+        "foursquare": #1db0ec,
+        "github": #bd2c00,
+        "googleplus": #df4a32,
+        "green": #a0d468,
+        "greensea": #16a085,
+        "icomoon": #b35047,
+        "ie": #14b8f7,
+        "instagram": #3a688f,
+        "joomla": #1578b3,
+        "lanyrd": #163459,
+        "lastfm": #d81c23,
+        "linkedin": #0977b5,
+        "midnightblue": #2c3e50,
+        "mixi": #d1ad59,
+        "nephritis": #27ae60,
+        "opera": #cc0f16,
+        "orange": #f39c12,
+        "paypal": #00457c,
+        "picasa": #846c9e,
+        "pinterest": #cb2027,
+        "pomegranate": #c0392b,
+        "pumpkin": #d35400,
+        "purple": #8e44ad,
+        "red": #ed5565,
+        "reddit": #ff3d00,
+        "renren": #105ba3,
+        "rss": #f79738,
+        "safari": #6dadec,
+        "silver": #bdc3c7,
+        "sky": #3BBFA7,
+        "skype": #15adf0,
+        "smashing": #e6402d,
+        "soundcloud": #fe531b,
+        "stackoverflow": #f47a20,
+        "steam": #343434,
+        "sunflower": #f1c40f,
+        "teal": #0dd3bb,
+        "tumblr": #385774,
+        "turquoise": #1abc9c,
+        "twitter": #00acee,
+        "vimeo": #1ab7ea,
+        "vk": #54769a,
+        "wetasphalt": #34495e,
+        "windows": #00ccff,
+        "wordpress": #22769b,
+        "yahoo": #500095,
+        "yelp": #c21200,
+        "youtube": #cd332d
+);
+
+@each $color-name, $color in $colors {
+  .text-#{$color-name}{ color: $color; }
+  .bg-#{$color-name}{ background-color: $color; color: $white; }
+  .#{$color-name}-hover{ transition: all 0.25s ease; }
+  .#{$color-name}-hover:hover, .#{$color-name}-hover:focus{ background-color: $color !important; }
+  .#{$color-name}-text-hover{ transition: all 0.25s ease; }
+  .#{$color-name}-text-hover:hover, .#{$color-name}-text-hover:focus{ color: $color !important; }
+  .nav>li>a.#{$color-name}-hover:focus{ background-color: $color !important; }
+  .#{$color-name}-border-top{ border: 1px solid #ccc; border-top: 5px solid $color; }
+  .nav-tab-#{$color-name}{
+    border-bottom-color: $color !important;
+    & > li.active > a, & > li.active > a:hover, & > li.active > a:active, & > li.active > a:focus{ background-color: $color; color: #fff; }
+  }
+  .btn-#{$color-name}{
+    background-color: $color;
+    color: $white;
+
+    &:hover, &:active, &:focus{
+      background-color: darken($color, 15%);
+      color: $white;
+    }
+  }
+
+  .btn-border-#{$color-name}{
+    background-color: $white;
+    color: $color;
+    border: 1px solid $color;
+    transition: all .2s ease-in;
+
+    &:hover, &:active, &:focus{
+      background-color: darken($color, 15%);
+      color: $white;
+    }
+  }
+
+  .cat-list-#{$color-name} > a.active{
+    &:focus, &:hover{ background-color: $color; }
+    background-color: $color;
+  }
+
+  .list-item-header-#{$color-name}{
+    overflow: hidden; width: 100%; border-radius: 5px 0 0 0;
+    .list-item-num{ background-color: $color; }
+  }
+
+  .border-#{$color-name}{
+    border-color: $color !important;
+  }
+  .ribbon-#{$color-name}{ background-color: $color; &:before, &:after{ border-top-color: darken($color, 20%) !important; } }
+}

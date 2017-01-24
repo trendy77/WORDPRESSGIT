@@ -1,0 +1,401 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cryout Serious Slider\n"
+"POT-Creation-Date: 2016-05-06 14:26+0200\n"
+"PO-Revision-Date: 2016-05-06 14:27+0200\n"
+"Last-Translator: Cryout Creations\n"
+"Language-Team: Cryout Creations\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: _e;_x;_n;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../cryout-serious-slider.php:53 ../cryout-serious-slider.php:88
+#: ../cryout-serious-slider.php:287
+msgid "Serious Slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:85
+msgid "Retrieving sliders..."
+msgstr ""
+
+#: ../cryout-serious-slider.php:86
+msgid "Error retrieving sliders"
+msgstr ""
+
+#: ../cryout-serious-slider.php:87
+msgid "Cryout Serious Slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:89
+msgid "Insert Slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:90
+msgid "Cancel"
+msgstr ""
+
+#: ../cryout-serious-slider.php:91
+msgid "Select Slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:92
+msgid "Add Slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:140
+msgid "About"
+msgstr ""
+
+#: ../cryout-serious-slider.php:151
+msgid "About Plugin"
+msgstr ""
+
+#: ../cryout-serious-slider.php:160
+msgid "Plugin homepage"
+msgstr ""
+
+#: ../cryout-serious-slider.php:161
+msgid "Support forum"
+msgstr ""
+
+#: ../cryout-serious-slider.php:162
+msgid "Changelog"
+msgstr ""
+
+#: ../cryout-serious-slider.php:255 ../cryout-serious-slider.php:328
+msgid "Define Sliders"
+msgstr ""
+
+#: ../cryout-serious-slider.php:272
+msgid "Description."
+msgstr ""
+
+#: ../cryout-serious-slider.php:285
+msgid "Slides"
+msgstr ""
+
+#: ../cryout-serious-slider.php:286 ../cryout-serious-slider.php:288
+#: ../inc/taxmeta.php:70
+msgid "Slide"
+msgstr ""
+
+#: ../cryout-serious-slider.php:289 ../cryout-serious-slider.php:290
+msgid "Add New Slide"
+msgstr ""
+
+#: ../cryout-serious-slider.php:291
+msgid "New Slide"
+msgstr ""
+
+#: ../cryout-serious-slider.php:292
+msgid "Edit Slide"
+msgstr ""
+
+#: ../cryout-serious-slider.php:293
+msgid "View Slide"
+msgstr ""
+
+#: ../cryout-serious-slider.php:294
+msgid "All Slides"
+msgstr ""
+
+#: ../cryout-serious-slider.php:295
+msgid "Search Slide"
+msgstr ""
+
+#: ../cryout-serious-slider.php:296
+msgid "Parent Slides:"
+msgstr ""
+
+#: ../cryout-serious-slider.php:297
+msgid "No slides found."
+msgstr ""
+
+#: ../cryout-serious-slider.php:298
+msgid "No slides found in Trash."
+msgstr ""
+
+#: ../cryout-serious-slider.php:318
+msgid "Sliders"
+msgstr ""
+
+#: ../cryout-serious-slider.php:319 ../cryout-serious-slider.php:357
+msgid "Slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:320
+msgid "Search Sliders"
+msgstr ""
+
+#: ../cryout-serious-slider.php:321
+msgid "All Sliders"
+msgstr ""
+
+#: ../cryout-serious-slider.php:322
+msgid "Parent Slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:323
+msgid "Parent Slider:"
+msgstr ""
+
+#: ../cryout-serious-slider.php:324
+msgid "Edit Slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:325
+msgid "Update Slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:326
+msgid "Add New Slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:327
+msgid "New Slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:356
+msgid "Title"
+msgstr ""
+
+#: ../cryout-serious-slider.php:358
+msgid "Featured Image"
+msgstr ""
+
+#: ../cryout-serious-slider.php:359
+msgid "Date"
+msgstr ""
+
+#: ../cryout-serious-slider.php:360
+msgid "Order"
+msgstr ""
+
+#: ../cryout-serious-slider.php:377
+msgid "No featured image set."
+msgstr ""
+
+#: ../cryout-serious-slider.php:393
+msgid "Edit slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:402
+msgid "No Slider"
+msgstr ""
+
+#: ../cryout-serious-slider.php:443
+#, php-format
+msgid "All %s"
+msgstr ""
+
+#: ../cryout-serious-slider.php:480
+msgid "Slide Link"
+msgstr ""
+
+#: ../cryout-serious-slider.php:493
+msgid "Link URL"
+msgstr ""
+
+#: ../cryout-serious-slider.php:497
+msgid "Open In New Window"
+msgstr ""
+
+#: ../cryout-serious-slider.php:498
+msgid "Leave empty to disable link."
+msgstr ""
+
+#: ../inc/right-column.php:6
+msgid "Shortcode"
+msgstr ""
+
+#: ../inc/right-column.php:7
+msgid "Use the shortcode to include the slider in posts, pages or widgets"
+msgstr ""
+
+#: ../inc/right-column.php:10
+msgid "Template"
+msgstr ""
+
+#: ../inc/right-column.php:11
+msgid "Use the PHP code to include the slider directly in files"
+msgstr ""
+
+#: ../inc/settings.php:15
+msgid "Sample slider created."
+msgstr ""
+
+#: ../inc/settings.php:16
+msgid "Navigate to Slider and Slides sections to see the sample content."
+msgstr ""
+
+#: ../inc/settings.php:17
+msgid "Dismiss this notice."
+msgstr ""
+
+#: ../inc/settings.php:63
+#, php-format
+msgid "version: %s"
+msgstr ""
+
+#: ../inc/settings.php:64
+msgid "by"
+msgstr ""
+
+#: ../inc/settings.php:72
+msgid "Support"
+msgstr ""
+
+#: ../inc/settings.php:76
+msgid "For support questions please use"
+msgstr ""
+
+#: ../inc/settings.php:77
+msgid "our forum"
+msgstr ""
+
+#: ../inc/settings.php:86
+msgid ""
+"Automatically set up a sample slider with 3 slides to use as a guide for "
+"your own content."
+msgstr ""
+
+#: ../inc/settings.php:88
+msgid "Create Sample Slider"
+msgstr ""
+
+#: ../inc/shortcodes.php:119
+msgid "Previous"
+msgstr ""
+
+#: ../inc/shortcodes.php:123
+msgid "Next"
+msgstr ""
+
+#: ../inc/taxmeta.php:5
+msgid "by date"
+msgstr ""
+
+#: ../inc/taxmeta.php:5
+msgid "by order value"
+msgstr ""
+
+#: ../inc/taxmeta.php:7
+msgid "Sort Order"
+msgstr ""
+
+#: ../inc/taxmeta.php:13
+msgid "Adapt to images"
+msgstr ""
+
+#: ../inc/taxmeta.php:13
+msgid "Force constraints"
+msgstr ""
+
+#: ../inc/taxmeta.php:15
+msgid "Slider Size"
+msgstr ""
+
+#: ../inc/taxmeta.php:25
+msgid "Width"
+msgstr ""
+
+#: ../inc/taxmeta.php:33
+msgid "Height"
+msgstr ""
+
+#: ../inc/taxmeta.php:40
+msgid "Light"
+msgstr ""
+
+#: ../inc/taxmeta.php:41
+msgid "Dark"
+msgstr ""
+
+#: ../inc/taxmeta.php:42
+msgid "Blank"
+msgstr ""
+
+#: ../inc/taxmeta.php:43
+msgid "Bootstrap"
+msgstr ""
+
+#: ../inc/taxmeta.php:45
+msgid "Color Scheme"
+msgstr ""
+
+#: ../inc/taxmeta.php:52
+msgid "Base Font Size"
+msgstr ""
+
+#: ../inc/taxmeta.php:60
+msgid "Always hidden"
+msgstr ""
+
+#: ../inc/taxmeta.php:60
+msgid "Appear on hover"
+msgstr ""
+
+#: ../inc/taxmeta.php:60
+msgid "Always visible"
+msgstr ""
+
+#: ../inc/taxmeta.php:62
+msgid "Bullets and Navigation"
+msgstr ""
+
+#: ../inc/taxmeta.php:69
+msgid "Fade"
+msgstr ""
+
+#: ../inc/taxmeta.php:71
+msgid "Overslide"
+msgstr ""
+
+#: ../inc/taxmeta.php:72
+msgid "Underslide"
+msgstr ""
+
+#: ../inc/taxmeta.php:73
+msgid "Parallax"
+msgstr ""
+
+#: ../inc/taxmeta.php:74
+msgid "Horizontal Flip"
+msgstr ""
+
+#: ../inc/taxmeta.php:75
+msgid "Vertical Flip"
+msgstr ""
+
+#: ../inc/taxmeta.php:78
+msgid "Transition Effect"
+msgstr ""
+
+#: ../inc/taxmeta.php:84
+msgid "Enabled"
+msgstr ""
+
+#: ../inc/taxmeta.php:84
+msgid "Disabled"
+msgstr ""
+
+#: ../inc/taxmeta.php:86
+msgid "Transition Pause on Hover"
+msgstr ""
+
+#: ../inc/taxmeta.php:94
+msgid "Transition Delay"
+msgstr ""
+
+#: ../inc/taxmeta.php:102
+msgid "Transition Duration"
+msgstr ""
+
+#: ../inc/widgets.php:26
+msgid "Displayed Slider"
+msgstr ""

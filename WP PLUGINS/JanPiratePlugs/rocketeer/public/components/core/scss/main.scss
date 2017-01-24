@@ -1,0 +1,70 @@
+body{ background-color: #f5f5f5; color: #424242; }
+
+$primary          : #3c8dbc;
+$success          : #00a65a;
+$info             : #00c0ef;
+$warning          : #f39c12;
+$danger           : #dd4b39;
+
+@import 'colors';
+@import 'bs';
+@import 'header';
+@import 'list';
+@import 'media';
+@import 'polls';
+@import 'quiz';
+@import 'users';
+@import 'profile';
+@import 'mobile';
+@import 'newsletter';
+
+/************** HELPERS *************/
+img{ max-width: 100%; }
+.push-top{ margin-top: 25px; }
+.responsive-canvas{ background-color: #fff; width: 100%; height: auto; }
+.widget{
+  margin-bottom: 20px;
+  .media-item-ctr-2{
+    img{ height: 120px; }
+    h3{ font-size: 20px; font-weight: 600; }
+    padding-bottom: 0;
+  }
+}
+.montserrat{ font-family: 'Montserrat', sans-serif; }
+.gray-border-left{ border-left: 1px solid #e5e3da; }
+.form-steps-group{  display: table;  width: 100%;  table-layout: fixed;  margin-bottom: 15px;  }
+.form-step{ display: table-cell; background-color: #73c1e7; padding: 10px; border-left: 3px solid #fff; color: #fff; text-align: center; }
+.form-step-active{ background-color: #F24949; }
+.form-step-complete{ background-color: #82B440; }
+.form-steps-ctr .btn-step{ margin-right: 5px; }
+.site-footer{
+  margin: 10px auto;
+  .btn-group{ ul.dropdown-menu{ top: inherit; bottom: 100%; } }
+}
+
+/************** CONTENT **************/
+.ribbon-header{
+  display: block; color: #fff; padding: 10px 10px; text-align: center; text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif; font-size: 14px; position: relative; margin: 0 -8px;
+
+  .fa-cat-icon{ position: absolute; top: 13px; left: 15px; font-size: 16px; }
+  .fa-angle-right{ position: absolute; top: 13px; right: 15px; font-size: 16px; }
+
+  &:before{
+    position: absolute; top: 100%; left: 0; width: 0; content: '';
+    border-top: 8px solid transparent; height: 0; border-left: 8px solid transparent;
+  }
+  &:after{
+    position: absolute; top: 100%; right: 0; width: 0; content: '';
+    border-top: 8px solid transparent; height: 0; border-right: 8px solid transparent;
+  }
+}
+
+/************** BUTTONS ****************/
+a.rocketeer-btn{ color: #fff; padding: 8px; &:hover, &:focus, :active{ color: #fff; } }
+a.rocketeer-btn.poll{ background-color: #F24484; &:hover, &:focus, :active{ background-color: #D84078; } }
+a.rocketeer-btn.quiz{ background-color: #3290A6; &:hover, &:focus, :active{ background-color: #2E7D90; } }
+a.rocketeer-btn.images{ background-color: #3BBFA7; &:hover, &:focus, :active{ background-color: #36AB96; } }
+a.rocketeer-btn.videos{ background-color: #F24949; &:hover, &:focus, :active{ background-color: #CF3A3A; } }
+a.rocketeer-btn.article{ background-color: #F2AB27; &:hover, &:focus, :active{ background-color: #D39624; } }
+a.rocketeer-btn.list{ background-color: #5D55D6; &:hover, &:focus, :active{ background-color: #5D55D6; } }

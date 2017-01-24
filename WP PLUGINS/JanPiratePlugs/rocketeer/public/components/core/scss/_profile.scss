@@ -1,0 +1,30 @@
+.profileHeader{ position: relative; background-repeat: no-repeat; background-size: cover; background-position: center; height: 350px; }
+.profileHeaderOverlay{ height: 350px; position: absolute; top: 0; left: 0; background-color: rgba(0,0,0,0.35); width: 100%; }
+.profileHeader > .img-circle{
+  border: 3px solid; position: absolute; width: 128px; height: 128px; left: 0; right: 0; margin: 0 auto; top: 20px;
+  -webkit-animation: border_color_change 2s infinite alternate;  -moz-animation: border_color_change 2s infinite alternate;
+  -o-animation: border_color_change 2s infinite alternate;  animation: border_color_change 2s infinite alternate;
+}
+.profileHeaderInfo{
+  text-align: center;  color: #fff;  position: absolute;  left: 0;  right: 0;  margin: 0 auto;
+  top: 140px;  max-width: 100%; width: 350px;
+}
+.profileHeaderBasicDetails > .img-responsive{ display: inline-block; }
+.profileSocialIcons{ margin: 5px 0; }
+.profileSocialIcons > a{ color: #fff; padding: 3px 5px; margin-right: 10px; text-align: center; }
+.profileSocialIcons > a:hover{
+  -webkit-animation: logo_color_change 2s infinite alternate;  -moz-animation: logo_color_change 2s infinite alternate;
+  -o-animation: logo_color_change 2s infinite alternate;  animation: logo_color_change 2s infinite alternate;
+}
+.profileNav{ display: table; table-layout: fixed; width: 100%;  }
+.profileNav > a{
+  display: table-cell; padding: 10px;  text-align: center;  color: #fff;
+  background-color: #0B1318;  text-decoration: none; transition: background-color 0.2s linear;
+}
+.profileNav > a:hover{ background-color: #1FAE5B; }
+.profileNav > a.active{ background-color: #1FAE5B; }
+.followers-preview{
+  margin: 10px 0; overflow: hidden;
+  a{ width: 19%; box-sizing: border-box; border: 1px solid #fff; float: left; }
+  img{ width: 100%; }
+}

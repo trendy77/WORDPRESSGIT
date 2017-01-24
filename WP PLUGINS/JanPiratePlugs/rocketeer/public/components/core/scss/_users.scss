@@ -1,0 +1,24 @@
+.social-login{
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  a{ display: table-cell; margin: 0; outline: none; border: none; border-radius: 0; }
+}
+.topUserItem{
+  padding-bottom: 10px;  border-bottom: 1px solid #ECECEC;
+
+  .img-circle{ width: 52px; height: 52px; border: 1px solid #ECECEC; }
+  a{
+    font-size: 14px; font-weight: bold; text-transform: uppercase;
+    &:hover, &:active, &:focus{ text-decoration: none; }
+  }
+  .media-body{ position: relative; }
+  .media-user-level{ color: #7D7D7D; font-weight: 300; }
+  .media-user-points{
+    position: absolute; bottom: 15px; right: 25px; font-weight: bold; text-transform: uppercase;
+    span{ letter-spacing: 2px; }
+  }
+}
+.widget{
+  .btn{ margin-bottom: 15px; }
+}

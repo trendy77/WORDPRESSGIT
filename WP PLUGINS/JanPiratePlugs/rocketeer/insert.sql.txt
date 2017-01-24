@@ -1,0 +1,29 @@
+INSERT INTO `memes` (`id`, `meme_name`, `upl_name`, `ext`, `created_at`, `updated_at`) VALUES
+	(1, 'Bad Luck Brian', 'memes/bad_luck_brian.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(2, 'Annoyed Picard', 'memes/annoyed_picard.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(3, 'Toy Story', 'memes/toy_story.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(4, 'Confession Bear', 'memes/confession_bear.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(5, 'Dancing Kids', 'memes/dancing_kids.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(6, 'Dr Evil', 'memes/dr_evil.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(7, 'First World Problems', 'memes/first_world_problems.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(8, 'Futurama - Not Sure', 'memes/futurama_fry.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(9, 'Maury Povich Lie Detector', 'memes/maury.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(10, 'One Does Not Simply', 'memes/one_does_not_simply.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(11, 'Overly Manly Man', 'memes/overly_manly_man.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(12, 'Squeamish Seal', 'memes/squeamish_seal.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(13, 'That would be great!', 'memes/that_would_be_great.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24'),
+	(14, 'The Most Interesting Man in the World', 'memes/interesting_man.jpg', 'jpg', '2016-01-01 21:17:24', '2016-01-01 21:17:24');
+
+INSERT INTO `settings` (
+        `id`,`site_name`, `site_title`, `site_desc`, `display_count`, `site_dir`, `site_domain`, `slides`,
+        `sidebar_ad`, `header_ad`, `footer_ad`, `list_ad`, `last_media_cron_update`, `recaptcha_public_key`,
+        `widgets`, `custom_css`, `media_overrides`, `media_defaults`, `languages`, `iframe_urls`, `created_at`, `updated_at`
+    ) VALUES (
+    1,'Rocketeer', 'Rocketeer', 'Rocketeer', 8, 'PLACEHOLDER_SITE_DIR', 'PLACEHOLDER_SITE_DOMAIN', '[]',
+    '', '', '', '', 1, '',
+    '[]', '', 'PLACEHOLDER_OVERRIDES', 'PLACEHOLDER_DEFAULTS', 'PLACEHOLDER_LANG', 'PLACEHOLDER_IFRAME_URLS',
+    CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+);
+
+INSERT INTO `users` ( `id`, `username`, `email`, `password`, `upl_dir`, `about`, `display_name`, `status`, `isAdmin`, `isMod`, `login_type`, `header_img`, `autoapprove`, `email_confirmed`, `created_at`, `updated_at`) VALUES
+    ( 1, 'admin', 'admin@admin.com', '$2y$10$LIld0Zlo6L2jhBzWRkI0KONqSVBS9CkT2B4Vj3jLSFnD0U0bj4IxW', 'a/1/admin', '', 'admin', 1, 2, 1, 1, 'headers/4.jpg', 2, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

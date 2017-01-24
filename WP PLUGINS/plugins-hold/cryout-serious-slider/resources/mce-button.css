@@ -1,0 +1,8 @@
+/*i.mce-i-serious_slider:before {
+    font-family: "dashicons";
+    content: "\f116";
+}*/
+
+i.mce-i-serious_slider {
+	background: #FFF url(images/serious-slider-editor-icon.png) no-repeat;
+}

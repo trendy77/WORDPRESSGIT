@@ -1,0 +1,22 @@
+.widget-ctr{
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 6px;
+  margin-bottom: 6px;
+  .btn{ margin-left: 5px; }
+}
+
+.mediaEditItemOverviewCtr{
+  background-color: #eee; overflow: hidden; padding: 5px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;
+  .btn{ margin-left: 5px; }
+}
+
+#dpz, .dropzone{ text-align: center; padding: 50px 0; border: 1px dashed #aaa; cursor: pointer; }
+#dpzImgPreviewCtr, .dropzone{ margin-top: 10px; }
+#dpzImgPreviewCtr .dz-filename, .dropzone .dz-filename{ font-weight: bold; }
+.responsive-canvas{ background-color: #fff; width: 100%; height: auto; }
+.memeSelectCtr{ overflow: hidden; display: table; padding: 5px; border-radius: 5px; font-weight: bold; width: 100%; table-layout: fixed; cursor: pointer; margin-bottom: 5px; }
+.memeSelectCtr:hover{ background-color: #7e4d7e; color: #fff; }
+.memeSelectCtr > div{ display: table-cell; padding: 3px; vertical-align: middle; }
+.memeSelectCtr  .img-responsive{ width: 64px; margin: 0 auto; }
+.memeEditor, .memeCtr{ margin-bottom: 10px; position: relative; }

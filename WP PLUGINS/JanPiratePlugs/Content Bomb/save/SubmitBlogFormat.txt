@@ -1,0 +1,7 @@
+[Post Title]//input your 'Post Title' here[/Post Title]
+
+[Post Text]//input your 'Post Text' here[/Post Text]
+
+[Post Categories]//input your 'Post Categories' here[/Post Categories]
+
+[Post Tags]//input your 'Post Tags' here[/Post Tags]
