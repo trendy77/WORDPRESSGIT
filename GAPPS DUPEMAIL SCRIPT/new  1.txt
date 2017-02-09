@@ -1,0 +1,553 @@
+	
+function dupCheck(){
+    var sheet = SpreadsheetApp.getActiveSheet();
+  var data = sheet.getDataRange().getValues();            //we do a single call to the spreadsheet to retrieve all the data.
+  var newData = new Array();                           // newData is an empty array where we will put all rows which are not duplicates.
+  for(i in data){
+    var row = data[i];
+    var duplicate = false;                             //      for loop iterates over each row in the data 2-dimensional array. 
+    for(j in newData){                                 //     For each row, the second loop tests if another row with matching data already exists in 
+      if(row.join() == newData[j].join()){             //     the newData array. If it is not a duplicate, the row is pushed into the newData array.
+        duplicate = true;
+      }
+    }
+    if(!duplicate){
+      newData.push(row);
+    }
+  }
+  sheet.clearContents();                            //      the script deletes the existing content of the sheet and inserts the content of the newData array.
+  sheet.getRange(1, 1, newData.length, newData[0].length).setValues(newData);
+  Logger.log("old length: ");  Logger.log(data.length);
+  Logger.log("new length: ");  Logger.log(newData.length);  
+SpreadsheetApp.flush();
+ }
+
+function send10(){
+for (var f = 0; f < 10; f++){ 
+sendXml();
+}
+}
+
+function sendxml(){
+ var ss = SpreadsheetApp.getActiveSpreadsheet();
+ var sheet = ss.getSheets()[0];
+ var range = sheet.getRange(2, 1, 1, 7);
+ var data = range.getValues();
+for (var i = 0; i < data.length; i++){ 
+ var rowData = data[i];
+ var methodCallObj = "metaWeblog.newPost";
+var methodCallObj.post_type = "post";
+ var methodCallObj.title = rowData[0];
+var desc = rowData[1];
+  var articleUrl = rowData[2];
+  var methodCallObj.categories = rowData[3]    // category
+  var wp_author_id = rowData[4];      // sourcetitle
+  var methodCallObj.mt_keywords = rowData[4];
+  var image = rowData[5];
+//DATA 6 IS CREATED TIME & DATE
+//DATA 7 IS PERSONAL BOARDS
+//DATA 8 IS TEAM BOARDS
+//DATA 9 IS FIRST HIGHLIGHTS?
+  if (desc == null){
+    desc = "[embedlyt] "+articleUrl+" [/embedlyt]";		// ****** may need to be sourceUrl????? *******
+  }
+  if (image){
+var img = "[embed width='123' height='456']" + image + "[/embed]";
+  var html1 = ('<!DOCTYPE html><html><head><base target="_top"><meta charset="UTF-8"><title>' + title + '</title></head><body>' + categories + tags + img + desc + '<a href="http://adf.ly/15466373/' + articleUrl + '">Read Original Article HERE</a><br></body></html>');
+  var html2 = (desc + '<br><a href="http://customkitsworldwide/">View More HERE</a><br><a href="http://customkitsworldwide/tag/' +sourceTitle+ '/">View More' + sourceTitle
++ ' HERE</a><br></body></html>');
+var html = html1+html2;
+    var methodCallObj.description = html;
+    } else {
+  var html1 = ('<!DOCTYPE html><html><head><base target="_top"><meta charset="UTF-8"><title>' + title + '</title></head><body>' + categories + tags + desc + '<a href="http://adf.ly/15466373/' + articleUrl + '">Read Original Article HERE</a><br></body></html>');
+  var html2 = (desc + '<br><a href="http://customkitsworldwide.com/">View More HERE</a><br><a href="http://customkitsworldwide.com/tag/' +sourceTitle+ '/">View More' + sourceTitle
++ ' HERE</a><br></body></html>');
+  var html = html1+html2;
+    var methodCallObj.description = html;
+  }
+//var file = UrlFetchApp.fetch(image).getBlob();  
+var methodCallObj.mt_allow_pings = 'closed';
+var methodCallObj.mt_allow_comments = 'closed';
+var methodCallObj.post-type_status = "publish";
+var methodCallObj.mt_excerpt = "will this work...? the world waits with baited breath, whilst the cat sleeps...";
+var methodCallObj.mt_text_more = "find out more, right NOW.";
+// ****** NEED ‘dateCreated’ ????   *****//////
+
+objToMethodCallXml_(methodCallObj);
+
+// Create the service binding
+var url = "https://organisemybiz.com/xmlrpc.php";
+var service = bind(url);
+var result = service.login("0","headlines", "ExtJCJn%jRMzl1(5L5W*JBP#", "publish");
+var token = result.token;
+var methodName = "metaWeblog.newPost"
+createFunctionBinding_(url, methodName)
+execMethodCall(url,metaWeblog.newPost,function(mr){methodResponse=mr;});
+ var token = methodResponse.params[0].token;
+  Logger.log('Logged in. Token: ' + token);
+
+/*
+MailApp.sendEmail(emailtoPost, title, desc, {
+        htmlBody: html,
+        attachments: [file.getAs(MimeType.JPEG)]
+         });
+    } catch(e) {
+ MailApp.sendEmail(emailtoPost, title, desc, {
+        htmlBody: html,
+         });
+  */
+  }
+  
+  }
+Logger.log("ONE SENT: " + title);
+ var ss = SpreadsheetApp.getActiveSpreadsheet();
+ var source = ss.getSheets()[0];
+ var destination = ss.getSheets()[1];
+ var range = source.getRange("A2:F2");
+  var last =destination.getLastRow();
+  var aim = last+1;
+  range.copyValuesToRange(destination, 1, 6, aim, aim);
+ sheet.deleteRow(2); 
+}
+}
+
+
+
+
+function objToMethodCallXml_(methodCallObj) { 
+  //<methodCall>
+  var methodCallXml = XmlService.createElement('methodCall');
+  //<methodName>
+  var methodNameXml = XmlService.createElement('methodName');
+  methodNameXml.setText(methodCallObj.methodName);
+  methodCallXml.addContent(methodNameXml);
+  //<params>
+  if (methodCallObj.params) { 
+    var paramsXml = XmlService.createElement('params');
+    for (var i = 0; i < methodCallObj.params.length; i++) {
+      var valueObj = methodCallObj.params[i];
+      var paramXml = XmlService.createElement('param');
+      var valueXml = objToValueXml_(valueObj);
+      paramXml.addContent(valueXml);
+      paramsXml.addContent(paramXml);
+    }
+    methodCallXml.addContent(paramsXml);
+  }
+  var document = XmlService.createDocument(methodCallXml);
+  var xml = XmlService.getPrettyFormat().format(document);
+  return xml;
+}
+
+function bind(url, methods) {
+  var methodNames = methods || getMethodNames(url);
+  var service = {};
+  for (var i = 0; i < methodNames.length; i++) {
+    var methodName = methodNames[i];
+    service[methodName] = createFunctionBinding_(url, methodName);
+    var nameParts = methodName.split(".");
+    if (nameParts.length > 1) {
+      var obj = service;
+      var j = 0;
+      for (; j < nameParts.length-1; j++) {
+        var name = nameParts[j];
+        obj[name] = obj[name] || {};
+        obj = obj[name];
+      }
+      obj[(nameParts[j])] = service[methodName];
+    }
+  }
+  return service;
+}
+
+function createFunctionBinding_(url, methodName) {
+  return function() {
+    var methodCall = {
+      methodName : methodName,
+      params : arguments
+    };
+    var methodResponse;
+    execMethodCall(url,methodCall,function(mr){methodResponse=mr;});
+    if (methodResponse.fault) {
+      throw new Error(Utilities.formatString("%d - %s", methodResponse.fault.faultCode, methodResponse.fault.faultString));
+    } else if (methodResponse.params && methodResponse.params.length > 0) {
+      return methodResponse.params[0];
+    }
+  };
+}
+
+function getMethodNames(url) {
+  var listMethods = createFunctionBinding_(url, ["system.listMethods"]);
+  var methodNames = listMethods();
+  return methodNames;
+}
+
+   
+function objToValueXml_(valueObj) {
+  //<value>
+  var valueXml = XmlService.createElement('value');
+  var dataXml;
+  switch (valueObj.type) {
+    case 'string' : dataXml = objToStringValueXml_(valueObj.value);  break;
+    case 'double' : dataXml = objToDoubleValueXml_(valueObj.value);  break;
+    case 'boolean': dataXml = objToBooleanValueXml_(valueObj.value); break;
+    case 'array'  : dataXml = objToArrayValueXml_(valueObj.value);   break;
+    case 'struct' : dataXml = objToStructValueXml_(valueObj.value);  break;
+    default: throw new Error("Unexpected value type: " + valueObj.type);
+  }
+  valueXml.addContent(dataXml);
+  return valueXml;
+}
+function objToSemanticMethodResponse_(methodResponseObj) {
+  var semanticMethodResponse = {};
+  if (methodResponseObj.params) {
+    semanticMethodResponse = objToSemanticMethodResponseParams_(methodResponseObj);
+  } else if (methodResponseObj.fault) {
+    semanticMethodResponse = objToSemanticMethodResponseFault_(methodResponseObj);
+  }
+  return semanticMethodResponse;
+}
+
+function objToSemanticMethodResponseParams_(methodResponseObj) {
+  var semanticMethodResponse = { params : [] };
+  for (var i = 0; i < methodResponseObj.params.length; i++) {
+    var valueObj = methodResponseObj.params[i];
+    var semanticValue = objToSemanticValue_(valueObj);
+    semanticMethodResponse.params.push(semanticValue);
+  }
+  return semanticMethodResponse;
+}
+
+function objToSemanticMethodResponseFault_(methodResponseObj) {
+  var semanticMethodResponse = {};
+  var valueObj = methodResponseObj.fault;
+  var semanticValue = objToSemanticValue_(valueObj);
+  semanticMethodResponse.fault = semanticValue;
+  return semanticMethodResponse;
+}
+
+function objToSemanticValue_(valueObj) {
+  switch (valueObj.type) {
+    case 'string' : return valueObj.value;
+    case 'double' : return valueObj.value;
+    case 'int'    : return valueObj.value;
+    case 'boolean': return valueObj.value;
+    case 'array'  : return objToSemanticArray_(valueObj.value);
+    case 'struct' : return objToSemanticStruct_(valueObj.value);
+    default: throw new Error("Unexpected value type: " + valueObj.type);
+  }
+}
+
+function objToSemanticArray_(objArray) {
+  var arr = [];
+  for (var i = 0; i < objArray.length; i++) {
+    var value = objArray[i];
+    var semanticValue = objToSemanticValue_(value);
+    arr.push(semanticValue);
+  }
+  return arr;
+}
+
+function objToSemanticStruct_(structObj) {
+  var struct = {};
+  for (var i = 0; i < structObj.length; i++) {
+    var member = structObj[i];
+    struct[member.name] = objToSemanticValue_(member.value);
+  }
+  return struct;
+}
+function objToStringValueXml_(value) {
+  //<string>
+  var stringXml = XmlService.createElement('string');
+  stringXml.setText(value);
+  return stringXml;
+}
+
+function objToDoubleValueXml_(value) {
+  //<double>
+  var doubleXml = XmlService.createElement('double');
+  doubleXml.setText(value);
+  return doubleXml;
+}
+
+function objToBooleanValueXml_(value) {
+  //<boolean>
+  var booleanXml = XmlService.createElement('boolean');
+  booleanXml.setText(value === true ? 1 : 0);
+  return booleanXml;
+}
+
+function objToArrayValueXml_(value) {
+  //<array>
+  var arrayXml = XmlService.createElement('array');
+  //<data>
+  var dataXml = XmlService.createElement('data');
+  for (var i = 0; i < value.length; i++) {
+    var item = value[i];
+    var itemXml = objToValueXml_(item);
+    dataXml.addContent(itemXml);
+  }
+  arrayXml.addContent(dataXml);
+  return arrayXml;
+}
+
+function objToStructValueXml_(value) {
+  //<struct>
+  var structXml = XmlService.createElement('struct');
+  for (var i = 0; i < value.length; i++) {
+    var member = value[i];
+    var memberXml = objToMemberXml_(member);
+    structXml.addContent(memberXml);
+  }
+  return structXml;
+}
+
+function objToMemberXml_(memberObj) {
+  //<member>
+  var memberXml = XmlService.createElement('member');
+  //<name>
+  var nameXml = XmlService.createElement('name');
+  nameXml.setText(memberObj.name);
+  memberXml.addContent(nameXml);
+  //<value>
+  var valueXml = objToValueXml_(memberObj.value);
+  memberXml.addContent(valueXml);
+return memberXml;
+}
+
+function semanticToMethodCallObj_(semanticMethodCall) {
+  var methodCall = {};
+  methodCall.methodName = semanticMethodCall.methodName;
+  methodCall.params = [];
+  for (var i = 0; i < semanticMethodCall.params.length; i++) {
+    var value = semanticToValueObj_(semanticMethodCall.params[i]);
+    methodCall.params.push(value);
+  }
+  return methodCall;
+}
+
+function semanticToValueObj_(semanticValue) {
+  if (semanticValue == null) {
+    throw new Error("null is not supported as a semantic value");
+  }
+  var valueType = typeof semanticValue;
+  if (valueType === 'string') {
+    return { type : 'string', value : semanticValue };
+  } else if (valueType === 'number') {
+    return { type : 'double', value : semanticValue };
+  } else if (valueType === 'boolean') {
+    return { type : 'boolean', value : semanticValue };
+  } else if (isArray_(semanticValue)) {
+    return { type : 'array', value : semanticToArrayValueObj_(semanticValue) };
+  } else if (valueType === 'object') { // Must be after array since an array is an object...
+    return { type : 'struct', value : semanticToStructValueObj_(semanticValue) };
+  } else {
+    throw new Error("Unexpected value type: " + valueType);
+  }
+}
+
+function semanticToArrayValueObj_(arrayValue) {
+  var arrayObj = [];
+  for (var i = 0; i < arrayValue.length; i++) {
+    var item = arrayValue[i];
+    var valueObj = semanticToValueObj_(item);
+    arrayObj.push(valueObj);
+  }
+  return arrayObj;
+}
+
+function semanticToStructValueObj_(obj) {
+  var structObj = [];
+  var props = Object.getOwnPropertyNames(obj);
+  for (var i = 0; i < props.length; i++) {
+    var propName = props[i];
+    var valueObj = semanticToValueObj_(obj[propName]);
+    var memberObj = { name : propName, value : valueObj };
+    structObj.push(memberObj);
+  }
+  return structObj;
+}
+
+function xmlToMethodResponseObj_(xml) {
+  var document = XmlService.parse(xml);
+  var methodResponseXml = document.getRootElement();
+  var methodResponseObj = {};
+  var paramsXml = methodResponseXml.getChild('params');
+  var faultXml = methodResponseXml.getChild('fault');
+  if (paramsXml) {
+    methodResponseObj = xmlToMethodResponseParamsObj_(paramsXml);
+  } else if (faultXml) {
+    methodResponseObj = xmlToMethodResponseFaultObj_(faultXml);
+  }
+  return methodResponseObj;
+}
+
+function xmlToMethodResponseParamsObj_(paramsXml) {
+  var methodResponseObj = {};
+  methodResponseObj.params = [];
+  var paramsXmlChildren = paramsXml.getChildren('param');
+  for (var i = 0; i < paramsXmlChildren.length; i++) {
+    var paramXml = paramsXmlChildren[i];
+    var valueXml = paramXml.getChild('value');
+    var valueObj = xmlToValueObj_(valueXml);
+    methodResponseObj.params.push(valueObj);
+  }
+  return methodResponseObj;
+}
+
+function xmlToMethodResponseFaultObj_(faultXml) {
+  var methodResponseObj = {};
+  var valueXml = faultXml.getChild('value');
+  var valueObj = xmlToValueObj_(valueXml);
+  methodResponseObj.fault = valueObj;
+  return methodResponseObj;
+}
+
+function xmlToValueObj_(valueXml) {
+  var valueObj = {};
+  var dataXml = valueXml.getChildren()[0];
+  var typeName = dataXml.getName();
+  switch (typeName) {
+    case 'string':  valueObj.type = 'string';  valueObj.value = xmlToStringValueObj_(dataXml);  break;
+    case 'double':  valueObj.type = 'double';  valueObj.value = xmlToDoubleValueObj_(dataXml);  break;
+    case 'int':     valueObj.type = 'int';     valueObj.value = xmlToIntValueObj_(dataXml);     break;
+    case 'boolean': valueObj.type = 'boolean'; valueObj.value = xmlToBooleanValueObj_(dataXml); break;
+    case 'array':   valueObj.type = 'array';   valueObj.value = xmlToArrayValueObj_(dataXml);   break;
+    case 'struct':  valueObj.type = 'struct';  valueObj.value = xmlToStructValueObj_(dataXml);  break;
+    default: throw new Error("Unexpected data type: " + typeName);
+  }
+  return valueObj;
+}
+
+function xmlToStringValueObj_(stringXml) {
+  return stringXml.getText();
+}
+
+function xmlToDoubleValueObj_(doubleXml) {
+  return parseFloat(doubleXml.getText());
+}
+
+function xmlToIntValueObj_(intXml) {
+  return parseInt(intXml.getText());
+}
+
+function xmlToBooleanValueObj_(booleanXml) {
+  var text = booleanXml.getText();
+  return text === "true" || text === "1";
+}
+
+function xmlToArrayValueObj_(arrayXml) {
+  var arrayValue = [];
+  var dataXml = arrayXml.getChild('data');
+  var valueXmls = dataXml.getChildren('value');
+  for (var i = 0; i < valueXmls.length; i++) {
+    var valueXml = valueXmls[i];
+    var valueObj = xmlToValueObj_(valueXml);
+    arrayValue.push(valueObj);
+  }
+  return arrayValue;
+}
+
+function xmlToStructValueObj_(structXml) {
+  var membersArray = [];
+  var memberXmls = structXml.getChildren('member');
+  for (var i = 0; i < memberXmls.length; i++) {
+    var memberXml = memberXmls[i];
+    var memberObj = xmlToMemberObj_(memberXml);
+    membersArray.push(memberObj);
+  }
+  return membersArray;
+}
+
+function xmlToMemberObj_(memberXml) {
+  var memberObj = {};
+  var nameXml = memberXml.getChild('name');
+  memberObj.name = nameXml.getText();
+  var valueXml = memberXml.getChild('value');
+  memberObj.value = xmlToValueObj_(valueXml);
+  return memberObj;
+}
+function semanticToMethodCallXml_(semanticMethodCall) {
+  var methodCallObj = semanticToMethodCallObj_(semanticMethodCall);
+  var methodCallXml = objToMethodCallXml_(methodCallObj);
+  return methodCallXml;
+}
+
+function xmlToSemanticMethodResponse_(methodResponseXml) {
+  var methodResponseObj = xmlToMethodResponseObj_(methodResponseXml);
+  var semanticMethodResponse = objToSemanticMethodResponse_(methodResponseObj);
+  return semanticMethodResponse;
+}
+
+// ###
+
+function isArray_(o) {
+  return (Object.prototype.toString.call(o) === '[object Array]');
+}
+
+function sendPostRequest_(url,xmlData,overrideOptions) {
+  var options = {
+    method : "post",
+    contentType : "application/xml",
+    payload : xmlData,
+    muteHttpExceptions : true
+  };
+  var response = UrlFetchApp.fetch(url, options);
+  return { code: response.getResponseCode(), contentText : response.getContentText() }
+}
+
+/**
+ * Convert a method call object to XML string
+ * @param {object} methodCall the method call descriptor - an object with the following structure: <pre>{ methodName : String, params : Array }</pre>
+ * @return {string} an XML string
+ */
+function methodCallToXml(methodCall) {
+  return semanticToMethodCallXml_(methodCall);
+}
+
+/**
+ * Convert a method response XML string to an object
+ * @param {string} methodResponseXml a string with the method response XML 
+ * @return {object} the method response object with the structure: <pre>{ params : Array }</pre>
+ */
+function methodResponseFromXml(methodResponseXml) {
+  return xmlToSemanticMethodResponse_(methodResponseXml);
+}
+
+/**
+ * Execute a method call (synchronously)
+ * @param {string} url the URL of the XML-RPC service
+ * @param {object} methodCall the method call descriptor - an object with the following structure: <pre>{ methodName : String, params : Array }</pre>
+ * @param {function(methodResponse)} onSuccess (optional) a callback in case of success - function(methodResponse), where methodResponse is an object with the following structure: <pre>{ params : Array }</pre>
+ * @param {function(responseCode,responseBody)} onError (optional) a callback in case of an error. <pre>function(responseCode, responseBody) { ... }</pre>
+ * @param {object} overrideOptions (optional) options for the POST request, to override default options (see UrlFetchApp.fetch(url, params))
+ * @return {object} the response object with structure: <pre>{ code : Number, contentText : String }</pre>
+ * @customfunction
+ */
+function execMethodCall(url,methodCall,onSuccess,onError,overrideOptions) {
+  onSuccess = onSuccess || function() {};
+  onError = onError || function(responseCode, responseBody) {
+    Logger.log("responseCode=" + responseCode + ", responseBody=" + responseBody);
+    switch (responseCode) {
+      case 400: throw new Error("400- Bad request");
+      case 404: throw new Error("404- Not found");
+      case 401: throw new Error("401- Unauthorized");
+      case 403: throw new Error("403- Forbidden");
+      case 500: throw new Error("500- Internal server error");
+      case 503: throw new Error("503- Service is unavailable");
+      default: throw new Error("" + responseCode);
+    }
+  };
+  Logger.log("Executing method call: %s", methodCall);
+  var methodCallXml = methodCallToXml(methodCall);
+  //Send the post request
+  var responseObj = sendPostRequest_(url,methodCallXml,overrideOptions);
+  if (responseObj.code === 200) {
+    //Parse the response xml data to get the token
+    var methodResponse = methodResponseFromXml(responseObj.contentText);
+    onSuccess(methodResponse);
+  } else {
+    onError(responseObj.code,responseObj.contentText);
+  }
+  return responseObj;
+}
+

@@ -38,13 +38,8 @@ for (var i = 0; i < data.length; i++){
   if (desc == null){
     desc = "[embedlyt]"+articleUrl+"[/embedlyt]";
   }
-  
- // regEx = '/http[s]*:\/\/.+/g';
- // var links = desc.match(regEx);
- // for (var j =0; j<links; links++){
-//links.Append(0, 'https://adf.ly/15466373/');
- // }
-    var articleUrl = rowData[2];
+
+  var articleUrl = rowData[2];
    var categories = rowData[3];
     var sourceTitle = rowData[4];
       var sourceUrl = rowData[5];
@@ -60,9 +55,16 @@ for (var i = 0; i < data.length; i++){
   MailApp.sendEmail(emailtoPost, title, desc, {
         htmlBody: html,
          });
-        }
-     
+         
+ var ss = SpreadsheetApp.getActiveSpreadsheet();
+ var source = ss.getSheets()[0];
+ var destination = ss.getSheets()[1];
+ var range = source.getRange("A2:F2");
+var last =destination.getLastRow();
+  var aim = last+1;
+ // This copies the data in B2:D4 in the source sheet to
+ // D4:F6 in the second sheet
+ range.copyValuesToRange(destination, 1, 6, aim, aim);
 sheet.deleteRow(2);
 }
-
-
+}
