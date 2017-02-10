@@ -1,0 +1,16 @@
+   var data = {
+				value1: title,
+                value2: html,
+				value3: catTit
+			};
+ var payload= (JSON.stringify(data));       
+ Logger.log(data);
+var url = "https://"; 
+ var options = {
+    'method': 'post',
+   'payload': payload
+    };   
+  var response = UrlFetchApp.fetch(url, options);
+ Logger.log(response);
+  }
+   

@@ -1,7 +1,8 @@
 
 var emailtoPost = "bobi698bira@post.wordpress.com";
 
-function duplicateCheck(){
+
+function dupCheck(e){
     var sheet = SpreadsheetApp.getActiveSheet();
   var data = sheet.getDataRange().getValues();            //we do a single call to the spreadsheet to retrieve all the data.
   var newData = new Array();                           // newData is an empty array where we will put all rows which are not duplicates.
@@ -18,62 +19,68 @@ function duplicateCheck(){
     }
   }
   sheet.clearContents();                            //      the script deletes the existing content of the sheet and inserts the content of the newData array.
-  sheet.getRange(1, 1, newData.length, newData[0].length).setValues(newData);
- Logger.log("old length: ");  Logger.log(data.length);
+ sheet.getRange(1, 1, newData.length, newData[0].length).setValues(newData);
+  Logger.log("old length: ");  Logger.log(data.length);
   Logger.log("new length: ");  Logger.log(newData.length);  
-    SpreadsheetApp.flush();
+SpreadsheetApp.flush();
  }
 
- 
-function sendEmail(){
- var ss = SpreadsheetApp.getActiveSpreadsheet();
+
+
+function do1(){
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
  var sheet = ss.getSheets()[0];
  var range = sheet.getRange(2, 1, 1, 7);
  var data = range.getValues();
 for (var i = 0; i < data.length; i++){ 
- var rowData = data[i];
- var title = rowData[0];
+    var rowData = data[i];
+  var title = rowData[0];
  var desc = rowData[1];
-  var articleUrl = rowData[2];
-  var categories = "[category " + rowData[3] + "]";
-  var sourceTitle = rowData[4];
-  var tags = "[tags " + sourceTitle + "]";
-  var sourceUrl = rowData[5];
-  var image = rowData[6]; 
- var img = "[embed width='123' height='456']" + image + "[/embed]";
   if (desc == null){
-    desc = "[embedlyt] "+sourceUrl+" [/embedlyt]";
+    desc = "[embedlyt]"+sourceUrl+"[/embedlyt]";
   }
+     var articleUrl = rowData[2];
+   var categories = "[category " + rowData[2] + "]";
+    var sourceTitle = rowData[2];
+  var tags = "[tags " + sourceTitle + "]";
+      var sourceUrl = rowData[3];
+       var image = rowData[4]; 
+ var img = "[embed width='123' height='456']" + image + "[/embed]";
+     //   var dupcheck =rowData[7];
   var html1 = ('<!DOCTYPE html><html><head><base target="_top"><meta charset="UTF-8"><title>' + title + '</title></head><body>' + categories + tags + img + desc + '<a href="http://adf.ly/15466373/' + sourceUrl + '">Read Original Article HERE</a><br></body></html>');
   var html2 = (desc + '<br><a href="http://fakenewsregistry.org/">View More HERE</a><br><a href="http://fakenewsregistry.org/tag/' +sourceTitle+ '">View More' + sourceTitle
 + ' HERE</a><br></body></html>');
   var html = html1+html2;
   if (image){
  var file = UrlFetchApp.fetch(image).getBlob();  
-       MailApp.sendEmail(emailtoPost, title, desc, {
+ try {
+    MailApp.sendEmail(emailtoPost, title, desc, {
         htmlBody: html,
         attachments: [file.getAs(MimeType.JPEG)]
          });
- } else { 
-  MailApp.sendEmail(emailtoPost, title, desc, {
+    } catch(e) {
+ MailApp.sendEmail(emailtoPost, title, desc, {
         htmlBody: html,
          });
-Logger.log("ONE SENT: " + title);
- var ss = SpreadsheetApp.getActiveSpreadsheet();
+    }
+ } else {
+     MailApp.sendEmail(emailtoPost, title, desc, {
+        htmlBody: html,
+         });
+ }
+    Logger.log("ONE SENT: " + title);
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
  var source = ss.getSheets()[0];
  var destination = ss.getSheets()[1];
- var range = source.getRange("A2:F2");
-var last =destination.getLastRow();
-  var aim = last+1;
- range.copyValuesToRange(destination, 1, 6, aim, aim);
-sheet.deleteRow(2);
-}
+var range = source.getRange(2, 1, 9);
+ var values = range.getValues();
+var last =destination.appendRow(values);
+ source.deleteRow(2);
 }
 }
 
- 
-function send10(){
-for (var f = 0; f < 10; f++){ 
-sendEmail();
+function do10(){
+  for (var t=0;t<10;t++){
+  do1
 }
 }
