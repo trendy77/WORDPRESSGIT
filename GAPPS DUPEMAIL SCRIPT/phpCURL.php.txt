@@ -15,9 +15,3 @@ curl_setopt($ch, CURLOPT_TIMEOUT, 1);
 curl_exec($ch);
 curl_close($ch);
 }
-
-
-
-you would have to send this:
-
-wpPostXMLRPC(
