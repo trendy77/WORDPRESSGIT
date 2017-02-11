@@ -1,6 +1,6 @@
-Shortcodes
+//Shortcodes
 
-Shortcodes allow you to define a macro that expands to something of your choice. They're basically a sort of HTML tag that wraps content and accept attributes. For example, you could put this in post content:
+//Shortcodes allow you to define a macro that expands to something of your choice. They're basically a sort of HTML tag that wraps content and accept attributes. For example, you could put this in post content:
 
   [my-shortcode foo="bar"]Hello, World![/my-shortcode]
 
@@ -8,7 +8,8 @@ Shortcodes allow you to define a macro that expands to something of your choice.
 
   <aside data-foo="bar"> <h3>Hello, World!</h3></aside>
 
-                       if you include the code below in your `functions.php` file, you can create a post with the following content:
+// if you include the code below in your `functions.php` file, 
+//you can create a post with the following content:
 // IN FUNCTIONS.PHP
 
 function css_tricks_example_shortcode( $attrs, $content = null ) {
