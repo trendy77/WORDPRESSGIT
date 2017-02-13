@@ -1,0 +1,41 @@
+  <?php
+  
+  include "IXR_Library.php";
+$XmlRpc_result = null;
+$url= 'http://yoursite.com/xmlrpc.php'; // Your XMLRPC Url
+$XmlRpc_client = new IXR_Client ($url);
+$date = new IXR_Date(strtotime('2015-02-23 18:57:33') ); // writing publish date
+$encoding='UTF-8';
+$title="New post with metaWeblog.newPost and IXR_Library by seegatesite"; // your post title
+$body="Hello world, this is my metaWeblog.newPost and IXR_Library first content"; // the article content
+$category="category1, category2"; // Post category can be seperated by comma seperated. Ensure that these categories exists in your site.
+$keywords="keyword1, keyword2, keyword3";  // This is tag post
+$customfields=array('key'=>'My Xmlrpc', 'value'=>'metaWeblog.newPost'); // Custom field
+ 
+$title = htmlentities($title,ENT_NOQUOTES,$encoding);
+$keywords = htmlentities($keywords,ENT_NOQUOTES,$encoding); 
+ 
+$content = array(
+             'title'=>$title,
+             'description'=>$body,
+             'mt_allow_comments'=>0, // 1 to allow comments
+             'mt_allow_pings'=>0, // 1 to allow trackbacks
+             'post_type'=>'post',
+             'mt_keywords'=>$keywords,
+             'categories'=>array($category),
+             'custom_fields' => array($customfields) ,
+             'date_created_gmt' => $date
+          );
+$params = array(1,'your-username','your password',$content,true); // set true if you need to publish post, set false if you need set your post as draft
+ try{
+    $XmlRpc_result = $XmlRpc_client->query(
+        'metaWeblog.newPost',$params
+    );
+    $data = $XmlRpc_client->getResponse();
+    print_r( $data );
+}
+ catch (Exception $e){
+     var_dump ( $e->getMessage ());
+ }
+ 
+ 
