@@ -1,7 +1,4 @@
 //*** ALL SITES GOOGLE ANAYLTICS TRACKING
-<?php include_once("analyticstracking3.php") ?>
-
-
 
 // CUSTOM KITS WW
 Tracking ID
@@ -55,24 +52,6 @@ UA-84079763-5
   ga('create', 'UA-84079763-5', 'auto');
   ga('send', 'pageview');
 </script>
-
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- autoFRESH -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4943462589133750"
-     data-ad-slot="1916118425"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-AMP SPECIFIC
-<!-- AMP Analytics --><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-<!-- Google Tag Manager -->
-
-<amp-analytics config="https://www.googletagmanager.com/amp.json?id=GTM-KQ2TL5L&gtm.url=SOURCE_URL" data-credentials="include"></amp-analytics>
-	
 
 // ORGBIZ.COM/NEWS
 Tracking ID

@@ -1,0 +1,94 @@
+
+var url = "https://organisemybiz.com/xmlrpc.php";
+var url2 = "http://fakenewsregistry.org/wp-content/ttt.php";
+	
+function dupCheck(){
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+ var sheet = ss.getSheets()[0];
+   var data = sheet.getDataRange().getValues();            //we do a single call to the spreadsheet to retrieve all the data.
+  var newData = new Array();                           // newData is an empty array where we will put all rows which are not duplicates.
+  for(i in data){
+    var row = data[i];    var duplicate = false;                             //      for loop iterates over each row in the data 2-dimensional array. 
+    for(j in newData){                                 //     For each row, the second loop tests if another row with matching data already exists in 
+      if(row.join() == newData[j].join()){             //     the newData array. If it is not a duplicate, the row is pushed into the newData array.
+        duplicate = true;
+      }
+    }
+    if(!duplicate){
+      newData.push(row);
+      }
+  }
+  sheet.clearContents();                            //      the script deletes the existing content of the sheet and inserts the content of the newData array.
+sheet.getRange(1, 1, newData.length, newData[0].length).setValues(newData);
+//  Logger.log("old length: ");  Logger.log(data.length); // Logger.log("new length: ");  Logger.log(newData.length);  
+SpreadsheetApp.flush();
+ }
+
+function sendxml(){
+var ss = SpreadsheetApp.getActiveSpreadsheet();
+ var sheet = ss.getSheets()[0];
+ var range = sheet.getRange(2, 1, 1, 7);
+ var data = range.getValues();
+for (var i = 0; i < data.length; i++){ 
+ var rowData = data[i];
+ var post_title = rowData[0]
+var desc = rowData[1];
+  var articleUrl = rowData[2];
+  var categories = rowData[3]    // category
+  var post_author = rowData[4];      //
+  var sourceTitle= rowData[4];
+  var image = rowData[5];
+     }      //DATA 6 IS CREATED TIME & DATE  //DATA 7 IS PERSONAL BOARDS  //DATA 8 IS TEAM BOARDS  //DATA 9 IS FIRST HIGHLIGHTS?
+var post_excerpt = "New article posted by " + post_author + " discussing " + post_title + "... Read it and watch it first here on the 24hr BizFeed Newswire.";
+   
+ 
+var tags = 'OrganiseMyBiz'
+if (desc == null){
+    desc = "[embedlyt] "+articleUrl+" [/embedlyt]";		// ****** may need to be sourceUrl????? *******
+  }
+  if (image){
+var imageSet = "[embed width='123' height='456']" + image + "[/embed]";
+  }    else {
+    }
+   var html1 = ('<!DOCTYPE html><html><head><base target="_top"><meta charset="UTF-8"><title>' + post_title + '</title></head><body>' + categories + tags + desc + '<a href="http://adf.ly/15466373/' + articleUrl + '">Read Original Article HERE</a><br></body></html>');
+  var html2 = (desc + '<br><a href="http://organisemybiz.com/contentfeed">View More #contentFeed HERE</a><br><a href="http://organisemybiz.com/tag/' +sourceTitle+ '">View More' + sourceTitle
++ ' HERE</a><br></body></html>');
+  var post_content = html1+html2;   
+    var stuff = { 
+   post_title: post_title,
+    post_author: post_author,
+post_content: post_content,
+post_excerpt: post_excerpt,
+tax_input: Array [tags, categories]
+};
+var payload= (JSON.stringify(stuff));    
+var url = "https://organisemybiz.com/wp-content/ttt.php";
+ var options = {
+    'method': 'post',
+   'payload': payload
+    };   
+  var response = UrlFetchApp.fetch(url, options);
+SpreadsheetApp.getActiveSpreadsheet().toast('response:', response, 10);
+Logger.log(response);
+Logger.log("ONE SENT: " + post_title);
+   ezTranslate(post_title, post_content, post_excerpt);
+var destination = ss.getSheets()[1];
+var range = sheet.getRange("A2:F2");
+  var last = destination.appendRow([range]);
+  //range.copyValuesToRange(last, 1, 6, aim, aim);
+sheet.deleteRow(2); 
+}
+
+//  if (image){
+ //var file = UrlFetchApp.fetch(image).getBlob();  
+
+function ezTranslate(post_title, post_title, post_excerpt) {
+var spanishHtml = LanguageApp.translate(desc,'en', 'es', {contentType: 'html'});
+var spanishTit = LanguageApp.translate(title, 'en', 'es', {contentType: 'text'});
+var spanishExc = LanguageApp.translate(excerpt, 'en', 'es', {contentType: 'text'});
+var ss =  SpreadsheetApp.getActiveSpreadsheet();
+var espSheet = ss.getSheets()[2];
+espSheet.appendRow([spanishTit, spanishHtml, spanishExc]);
+// range.copyValuesToRange(destination, 1, 6, aim, aim);;
+//Logger.log(spanishHtml);
+}
