@@ -91,8 +91,8 @@ class autoTPost
 		else
 			$this->_postData['post_title'] = $this->_title;
 		// slug
-		if (is_null($this->_slug) && $this->_slug != 'TODO')
-			exit("slug missing");
+	//	if (is_null($this->_slug) && $this->_slug != 'TODO')
+		//	exit("slug missing");
 		else
 			$this->_postData['post_name'] = $this->_slug;
 		// excerpt
@@ -127,7 +127,7 @@ class autoTPost
 		$pattern = self::DELIMITER . $pattern . self::DELIMITER;
 		$this->_content = preg_replace_callback(
 			$pattern,
-			"EnnoAutoPost::_replaceImages",
+			"autoTPost::_replaceImages",
 			$this->_content
 		);
 	}

@@ -25,22 +25,33 @@ $ip = '192.249.127.115';
 //$dbname = 'organ151_vape';
 //$table_prefix = '_7' **/
 //CKWW
+// define variables and set to empty values
+$post_title = $post_content = $post_excerpt = $post_author = "";
 
-// Create connection
-$conn = new mysqli($ip, $dbuser, $dbpass, $dbname);
-// Check connection
-if ($conn->connect_error) {
-die("Connection failed: " . $conn->connect_error);
-} 
-
-$sql = "INSERT INTO 7c3_posts (post_title, post_author, post_content, post_excerpt) VALUES ('".$_POST["post_title"]."','".$_POST["post_author"]."','".$_POST["post_content"]."','".$_POST["post_excerpt"]."')";
-
-if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$post_title = test_input($_POST["post_title"]);
+  $post_content = test_input($_POST["post_content"]);
+  $post_excerpt = test_input($_POST["post_excerpt"]);
 }
+ 
+ function test_input($data) {
+  $data = htmlspecialchars($data);
+  return $data;
+} 
+  
+// Create connection
+$conn = mysqli_connect("localhost", "ckww_77c", "t0mzdez2!", "ckww_77");
+// Check connection
+if (mysqli_connect_errno) {
+echo "Connection failed: " . mysqli_connect_error();
+} 
+mysqli_query($conn,"INSERT INTO 7c3_posts (post_title, post_author, post_content, post_excerpt)
+VALUES ($post_title,$post_content,$post_excerpt)";
 
-$conn->close();
+// Commit transaction
+mysqli_commit($conn);
+echo "success";
+// Close connection
+mysqli_close($conn);
 
 ?>

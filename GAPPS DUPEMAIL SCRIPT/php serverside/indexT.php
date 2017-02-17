@@ -9,7 +9,7 @@
 require_once 'inc/newTPost.php';
 $htmlString = $_SERVER['KMVAR_blogString'];
 $identifier = $_SERVER['KMVAR_blogIdentifier'];
-$obj = new EnnoAutoPost($htmlString, $identifier);
+$obj = new autoTPost($htmlString, $identifier);
 $obj->setMetadata();
 $obj->replaceImageMarkup();
 echo $obj->createPost();

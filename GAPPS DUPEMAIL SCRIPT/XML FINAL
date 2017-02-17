@@ -49,8 +49,7 @@ if (desc == null){
 var imageSet = "[embed width='123' height='456']" + image + "[/embed]";
   }    else {
     }
-   var html = ('<!DOCTYPE html><html><head><base target="_top"><meta charset="UTF-8"><title>' + post_title + '</title></head><body>' + categories + tags + desc + '<a href="http://adf.ly/15466373/' + articleUrl + '">Read Original Article HERE</a><br></body></html>' + desc + '<br><a href="http://organisemybiz.com/contentfeed">View More #contentFeed HERE</a><br><a href="http://organisemybiz.com/tag/' +sourceTitle+ '">View More' + sourceTitle
-+ ' HERE</a><br></body></html>');
+   var html = ('<!DOCTYPE html><html><head><base target="_top"><meta charset="UTF-8"><title>' + post_title + '</title></head><body>' + desc + '<a href="http://adf.ly/15466373/' + articleUrl + '">Read Original Article HERE</a><br></body></html><br><a href="http://organisemybiz.com/contentfeed">View More #contentFeed HERE</a><br><a href="http://organisemybiz.com/tag/' +sourceTitle+ '">View More' + sourceTitle + ' HERE</a><br></body></html>');
   var post_content = html;   
     var stuff = { 
    post_title: post_title,
@@ -85,6 +84,6 @@ var spanishTit = LanguageApp.translate(post_content, 'en', 'es', {contentType: '
 var spanishExc = LanguageApp.translate(post_excerpt, 'en', 'es', {contentType: 'text'});
 var ss =  SpreadsheetApp.getActiveSpreadsheet();
 var espSheet = ss.getSheetByName("Sheet3");
-var aim = espSheet.getRange("A2:C2");
+var aim = espSheet.getRange("A2:F2");
 copyValuesToRange([spanishTit, spanishHtml,spanishExc ]);
 }

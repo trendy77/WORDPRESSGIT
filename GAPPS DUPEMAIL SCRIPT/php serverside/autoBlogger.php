@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<meta charset="UTF-8">
+<title>"autoBlogger" </title>
+</head>
+<body>
 
 <?php 
 	include("lib/xmlrpc.inc");
