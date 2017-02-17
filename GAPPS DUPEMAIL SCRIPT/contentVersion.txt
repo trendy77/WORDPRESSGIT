@@ -38,8 +38,8 @@ for (var i = 0; i < data.length; i++){
   if (desc == null){
     desc = "[embedlyt]"+articleUrl+"[/embedlyt]";
   }
-
-  var articleUrl = rowData[2];
+  
+    var articleUrl = rowData[2];
    var categories = rowData[3];
     var sourceTitle = rowData[4];
       var sourceUrl = rowData[5];
@@ -49,22 +49,36 @@ for (var i = 0; i < data.length; i++){
   var html2 = (desc + '<br><a href="http://organisemybiz.com/contentfeed">View More #contentFeed HERE</a><br><a href="http://organisemybiz.com/tag/' +sourceTitle+ '">View More' + sourceTitle
 + ' HERE</a><br></body></html>');
   var html = html1+html2;
-
+    var articleUrl = rowData[2];
+   var categories = "[category " + rowData[3] + "]";
+    var sourceTitle = rowData[3];
+  var tags = "[tags " + sourceTitle + "]";
+      var sourceUrl = rowData[4];
+       var image = rowData[5]; 
+ var img = "[embed width='123' height='456']" + image + "[/embed]";
+     //   var dupcheck =rowData[7];
+  var html1 = ('<!DOCTYPE html><html><head><base target="_top"><meta charset="UTF-8"><title>' + title + '</title></head><body>' + categories + tags + img + desc + '<a href="http://adf.ly/15466373/' + articleUrl + '">Read Original Article HERE</a><br></body></html>');
+  var html2 = (desc + '<br><a href="http://fakenewsregistry.org/">View More HERE</a><br><a href="http://fakenewsregistry.org/tag/' +sourceTitle+ '">View More' + sourceTitle
++ ' HERE</a><br></body></html>');
+  var html = html1+html2;
+}
   //contentfeed no image required
   
   MailApp.sendEmail(emailtoPost, title, desc, {
         htmlBody: html,
          });
-         
+ 
  var ss = SpreadsheetApp.getActiveSpreadsheet();
  var source = ss.getSheets()[0];
  var destination = ss.getSheets()[1];
+
  var range = source.getRange("A2:F2");
-var last =destination.getLastRow();
-  var aim = last+1;
+
  // This copies the data in B2:D4 in the source sheet to
  // D4:F6 in the second sheet
- range.copyValuesToRange(destination, 1, 6, aim, aim);
-sheet.deleteRow(2);
+ range.copyValuesToRange(destination, 1, 6, 2, 2);
+	   
+source.deleteRow(2);
 }
-}
+
+

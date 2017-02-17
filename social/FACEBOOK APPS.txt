@@ -1,3 +1,7 @@
+// secret key 
+5582cae3fbe217a121285381cbdf007c
+for news
+
 // sdk setup for facebook - organisemybizMedia
 id for news: 1209167032497461
 ////

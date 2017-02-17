@@ -8,26 +8,20 @@ function duplicateCheck(){
     var row = data[i];
     var duplicate = false;                             //      for loop iterates over each row in the data 2-dimensional array. 
     for(j in newData){                                 //     For each row, the second loop tests if another row with matching data already exists in 
-      if(row.join() == newData[j].join()){             //     the newData array. If it is not a duplicate, the row is pushed into the newData array.
-        duplicate = true;
-      }
+    if(row[0] == newData[j][0] || row[1] == newData[j][1]){
+  duplicate = true;
+}
     }
     if(!duplicate){
       newData.push(row);
-    }
+      }
   }
   sheet.clearContents();                            //      the script deletes the existing content of the sheet and inserts the content of the newData array.
-  sheet.getRange(1, 1, newData.length, newData[0].length).setValues(newData);
-  Logger.log("old length: ");  Logger.log(data.length);
-  Logger.log("new length: ");  Logger.log(newData.length);  
-  SpreadsheetApp.flush();
+var rag=sheet.getRange(1, 1, newData.length, newData[0].length).setValues(newData);
+  var l=sheet.getRange(1,1,4,1); 
+  var f= l.setValues(["old length: ", data.length, "new length: " , newData.length]);  
+SpreadsheetApp.flush();
  }
- 
-function send10(){
-for (var f = 0; f < 10; f++){ 
-sendEmail();
-}
-}
 
 
 function sendEmail(){
@@ -76,8 +70,8 @@ var img = "[embed width='123' height='456']" + image + "[/embed]";
 
 
   MailApp.sendEmail(emailtoPost, title, desc, {
-        htmlBody: html,
-         });
+  htmlBody: html,
+});
   }
 Logger.log("ONE SENT: " + title);
  var ss = SpreadsheetApp.getActiveSpreadsheet();
